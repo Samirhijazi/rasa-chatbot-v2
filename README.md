@@ -13,7 +13,7 @@ rasa run actions
 rasa shell
 ```
 
-Try to type some queries like `What time is it now?` and see the response.
+Try to type some queries like `raise your hand 40 degree for 3 seconds` and see the response.
 
 Have Fun!
 
