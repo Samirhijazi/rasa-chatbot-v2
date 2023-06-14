@@ -1,0 +1,58 @@
+version: "2.0"
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+  - greet
+  - goodbye
+  - query_time
+  - query_date
+  - query_weekday
+  - raise_your_hand
+entities:
+  - date
+  - degree{45}
+  - time{5}
+slots:
+  date:
+    type: any
+    influence_conversation: false
+    mappings:
+        - type: custom
+  degree{45}:
+    type: any
+    influence_conversation: false
+    mappings:
+        - type: custom
+  time{5}:
+    type: any
+    influence_conversation: false
+    mappings:
+        - type: custom
+  requested_slot:
+    type: any
+    influence_conversation: false
+    mappings: []
+    #     - type: custom
+  time_value:
+    type: any
+    influence_conversation: false
+    mappings:
+        - type: custom
+  degree_value:
+    type: any
+    influence_conversation: false
+    mappings:
+        - type: custom
+responses:
+  utter_greet:
+    - text: Hello, I’m Rajesh, I can check the time, date and day of the week for you. You can ask me "what time is it now?", "what day is today?" or "what day is tomorrow?"
+  utter_goodbye:
+    - text: Goodbye!
+actions:
+  - action_query_time
+  - action_query_date
+  - action_query_weekday
+  - action_query_bot
+  - utter_goodbye
+  - utter_greet

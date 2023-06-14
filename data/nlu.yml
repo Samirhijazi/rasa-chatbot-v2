@@ -1,0 +1,41 @@
+version: "2.0"
+nlu:
+  - intent: greet
+    examples: |
+      - Hello
+      - Hi
+  - intent: goodbye
+    examples: |
+      - ByeBye
+      - Bye
+      - good bye
+      - exit
+  - intent: query_time
+    examples: |
+      - What's the time now
+      - What's the time
+      - What time it is
+      - What time it is now
+      - When is it
+      - The time now
+  - intent: query_date
+    examples: |
+      - What's the date [today](date)
+      - What date is [today](date)
+      - [Today](date)'s date
+      - What date is [it](date)
+      - The date of [yesterday](date)
+      - What's the date of [tomorrow](date)
+  - intent: query_weekday
+    examples: |
+      - What day is [today](date)
+      - What day is it [today](date)
+      - What day of the week is [it](date)
+      - The day of the week
+      - Tell me what day is it [today](date)
+  - intent: raise_your_hand
+    examples: |
+      - raise your hand [45](degree{45}) degrees for [5](time{5}) seconds
+      - release your hand [90](degree{45}) degrees for [10](time{5}) minutes
+      - up your arm [45](degree{45}) degrees for [2](time{5}) minutes
+      - up your hand [56](degree{45}) degrees for [12](time{5}) seconds
