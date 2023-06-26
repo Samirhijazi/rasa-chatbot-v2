@@ -1,4 +1,4 @@
-version: "2.0"
+version: "3.1"
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
@@ -11,28 +11,38 @@ intents:
   - raise_your_hand
 entities:
   - date
-  - degree{45}
-  - time{5}
+  - degree
+  - time
 slots:
   date:
     type: any
     influence_conversation: false
     mappings:
         - type: custom
-  degree{45}:
+  degree:
     type: any
     influence_conversation: false
     mappings:
-        - type: custom
-  time{5}:
+        - type: from_entity
+          entity: degree
+          role: target
+  time:
     type: any
     influence_conversation: false
     mappings:
-        - type: custom
-  requested_slot:
+        - type: from_entity
+          entity: time
+          role: target
+  requested_slot_degree:
     type: any
-    influence_conversation: false
-    mappings: []
+    mappings:
+      - type: from_text
+        entity: degree
+  requested_slot_time:
+    type: any
+    mappings:
+      - type: from_text
+        entity: time
     #     - type: custom
   time_value:
     type: any
@@ -54,5 +64,11 @@ actions:
   - action_query_date
   - action_query_weekday
   - action_query_bot
+  - action_bot_connect
   - utter_goodbye
   - utter_greet
+forms:
+  raise_form:
+    required_slots:
+      - degree
+      - time
