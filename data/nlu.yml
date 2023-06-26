@@ -1,4 +1,4 @@
-version: "2.0"
+version: "3.1"
 nlu:
   - intent: greet
     examples: |
@@ -33,9 +33,21 @@ nlu:
       - What day of the week is [it](date)
       - The day of the week
       - Tell me what day is it [today](date)
+  # - intent: raise_your_hand
+  #   examples: |
+  #     - raise your hand [45](degree{45}) degrees
+  #     - raise your hand for [5](time{5}) seconds
+  #     - release your hand [90](degree{45}) degrees
+  #     - release your hand for [10](time{5}) minutes
+  #     - raise your hand
+  #     - up your arm [45](degree{45}) degrees
+  #     - up your hand for [2](time{5}) minutes
+  #     - up your hand [56](degree{45}) degrees
+  #     - up your hand for [12](time{5}) seconds
   - intent: raise_your_hand
     examples: |
-      - raise your hand [45](degree{45}) degrees for [5](time{5}) seconds
-      - release your hand [90](degree{45}) degrees for [10](time{5}) minutes
-      - up your arm [45](degree{45}) degrees for [2](time{5}) minutes
-      - up your hand [56](degree{45}) degrees for [12](time{5}) seconds
+      - raise your hand [45 degrees](degree) for [5 seconds](time)
+      - raise your hand [90 degrees](degree) for [10 minutes](time)
+      - up your arm [45 degrees](degree) for [2 minutes](time)
+      - up your hand [56 degrees](degree) for [12 seconds](time)
+      - raise your hand
