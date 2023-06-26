@@ -1,4 +1,4 @@
-version: "2.0"
+version: "3.1"
 stories:
   - story: happy path
     steps:
@@ -16,10 +16,35 @@ stories:
     steps:
       - intent: query_weekday
       - action: action_query_weekday
+  
   - story: query bot
     steps:
       - intent: raise_your_hand
       - action: action_query_bot
+  # - story: query bot
+  #   steps:
+  #     - intent: raise_your_hand
+  #     - action: raise_form
+  #     - active_loop: raise_form
+  #     - slot_was_set:
+  #         - requested_slot: degree
+  #     - slot_was_set:
+  #         - requested_slot: time
+  #     - action: raise_form
+  #     - active_loop: null
+  #     - action: action_query_bot
+  # - story: query bot
+  #   steps:
+  #     - intent: raise_your_hand
+  #     - action: raise_form
+  #     - active_loop: raise_form
+  #     - slot_was_set:
+  #       - requested_slot: degree{45}
+  #     - slot_was_set:
+  #       - requested_slot: time{5}
+  #     - action: raise_form
+  #     - active_loop: null
+  #     - action: action_query_bot
   - story: say goodbye
     steps:
       - intent: goodbye
