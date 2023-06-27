@@ -59,6 +59,8 @@ responses:
     - text: Hello, I’m Rajesh, I can check the time, date and day of the week for you. You can ask me "what time is it now?", "what day is today?" or "what day is tomorrow?"
   utter_goodbye:
     - text: Goodbye!
+  # utter_query_bot:
+  #   - text: testinggggg
 actions:
   - action_query_time
   - action_query_date
