@@ -9,10 +9,10 @@ from rasa_sdk.types import DomainDict
 from rasa_sdk.forms import FormValidationAction
 from rasa.core.agent import Agent
 import dateutil.parser
-import spacy
+#import spacy
 import re
 
-nlp = spacy.load("en_core_web_sm")
+#nlp = spacy.load("en_core_web_sm")
 
 DEGREE_KEYWORDS = ["degrees"]
 TIME_KEYWORDS = ["seconds", "second", "minutes", "minute", "hours", "hour"]
@@ -106,6 +106,71 @@ class ActionQueryWeekday(Action):
     
 
 
+import json
+class ActionQueryBot(Action):
+    def name(self) -> Text:
+        return "action_query_bot"
+    
+    def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        intent_response = tracker.latest_message.get("text")
+        entities = tracker.latest_message.get("entities", [])
+        entity_info = [f"Entity: {entity['entity']} [{entity['value']}]" for entity in entities]
+        degree_entity = next(
+            (entity for entity in entities if entity["entity"] == "degree"), None
+        )
+        time_entity = next(
+            (entity for entity in entities if entity["entity"] == "time"), None
+        )
+
+        print("Degree Entity:", degree_entity)
+        print("Time Entity:", time_entity)
+
+        # dispatcher.utter_message(
+        #         text=f"The response."
+        #     )
+        # print("checking something")
+        # return "test"
+
+        if not degree_entity:
+            missing_entity = "degree"
+            dispatcher.utter_message(
+                text=f"The entity '{missing_entity}' is missing. Please provide the value for '{missing_entity}'."
+            )
+            return [SlotSet("requested_slot", "degree")]
+
+        if not time_entity:
+            missing_entity = "time"
+            dispatcher.utter_message(
+                text=f"The entity '{missing_entity}' is missing. Please provide the value for '{missing_entity}'."
+            )
+            return [SlotSet("requested_slot", "time")]
+
+        degree_value = degree_entity["value"]
+        time_value = time_entity["value"]
+
+        # Handle degree entity
+        degree_info = process_degree_value(degree_value)
+        #dispatcher.utter_message(text=f"Degree Entity: {degree_entity['entity']} - {degree_info}")
+
+        # Handle time entity
+        time_info = resolve_time(time_value)
+        json_response = {degree_entity['entity']: degree_info, 
+                         time_entity['entity']: time_info,
+                         "intent": intent}
+        json_response = json.dumps(json_response)
+
+        dispatcher.utter_message(text=json_response)
+
+        return [
+            SlotSet("degree_value", degree_info),
+            SlotSet("time_value", time_info),
+        ]
 
 # class ActionQueryBot(Action):
 #     def name(self) -> Text:
@@ -115,77 +180,25 @@ class ActionQueryWeekday(Action):
 #             self,
 #             dispatcher: CollectingDispatcher,
 #             tracker: Tracker,
-#             domain: Dict[Text, Any],
+#             domain: Dict[Text, Any]
 #     ) -> List[Dict[Text, Any]]:
-        # intent = tracker.latest_message.get("intent", {}).get("name")
-        # intent = tracker.latest_message.get("text", {}).get("name")
-        # entities = tracker.latest_message.get("entities", [])
-        # entity_info = [f"Entity: {entity['entity']} [{entity['value']}]" for entity in entities]
-        # degree_entity = next(
-        #     (entity for entity in entities if entity["entity"] == "degree"), None
-        # )
-        # time_entity = next(
-        #     (entity for entity in entities if entity["entity"] == "time"), None
-        # )
+#         #user_message = tracker.latest_message.get("text")
+#         # intent = tracker.latest_message.get("intent", {}).get("name")
+#         # print("Bot says, ",end=' ')
+#         # for i in r.json():
+#         #     bot_message = i['text']
+#         #     print(f"{bot_message}")
+#         #dispatcher.utter_message(text=f"message: {user_message} llll")
 
-        # print("Degree Entity:", degree_entity)
-        # print("Time Entity:", time_entity)
-
-        # dispatcher.utter_message(
-        #         text=f"The response."
-        #     )
-        # return []
-
-        # if not degree_entity:
-        #     missing_entity = "degree"
-        #     dispatcher.utter_message(
-        #         text=f"The entity '{missing_entity}' is missing. Please provide the value for '{missing_entity}'."
-        #     )
-        #     return [SlotSet("requested_slot", "degree")]
-
-        # if not time_entity:
-        #     missing_entity = "time"
-        #     dispatcher.utter_message(
-        #         text=f"The entity '{missing_entity}' is missing. Please provide the value for '{missing_entity}'."
-        #     )
-        #     return [SlotSet("requested_slot", "time")]
-
-        # degree_value = degree_entity["value"]
-        # time_value = time_entity["value"]
-
-        # # Handle degree entity
-        # degree_info = process_degree_value(degree_value)
-        # dispatcher.utter_message(text=f"Degree Entity: {degree_entity['entity']} - {degree_info}")
-
-        # # Handle time entity
-        # time_info = resolve_time(time_value)
-        # dispatcher.utter_message(text=f"Time Entity: {time_entity['entity']} - {time_info}")
-
-        # return [
-        #     SlotSet("degree_value", degree_info),
-        #     SlotSet("time_value", time_info),
-        # ]
-
-import requests
-class ActionQueryBot(Action):
-    def name(self) -> Text:
-        return "action_bot_connect"
-    
-    def run(
-            self,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]
-    ) -> List[Dict[Text, Any]]:
-        user_message = tracker.latest_message.get("text")
-        dispatcher.utter_message(text=f"message: {user_message} llll")
-
-        # Print the bot's response
-        # for message in bot_response:
-        #     print(message["text"])
-        #     dispatcher.utter_message(
-        #         text=f"The text is '{message['text']}'."
-        #     )
+#         # Print the bot's response
+#         # for message in bot_response:
+#         #     print(message["text"])
+#         #     dispatcher.utter_message(
+#         #         text=f"The text is '{message['text']}'."
+#         #     )
+#         print('test ya test')
+#         dispatcher.utter_message(text= "test test test test test test")
+#         return []
 
 def process_degree_value(degree_value: str) -> str:
     # Remove the 'degrees' keyword from the value
