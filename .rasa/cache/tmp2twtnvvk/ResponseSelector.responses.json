@@ -1,0 +1,48 @@
+{
+  "utter_chitchat/ask_name": [
+    {
+      "text": "hey my name is jack!"
+    },
+    {
+      "text": "hello i'm jack!"
+    }
+  ],
+  "utter_chitchat/greeting": [
+    {
+      "text": "hello man"
+    },
+    {
+      "text": "hey"
+    }
+  ],
+  "utter_chitchat/ask_age": [
+    {
+      "text": "i'm 25 years old"
+    }
+  ],
+  "utter_chitchat/ask_job": [
+    {
+      "text": "None of your business!"
+    }
+  ],
+  "utter_chitchat/insisting_ask_job": [
+    {
+      "text": "Okay! I work for World of Business"
+    }
+  ],
+  "utter_chitchat/ask_behavior": [
+    {
+      "text": "because you’re stupid, my name is written everywhere, and yet you’re asking me about my name!"
+    }
+  ],
+  "utter_chitchat/ask_inventing": [
+    {
+      "text": "so what, I’ve got figure"
+    }
+  ],
+  "utter_chitchat/ask_figure": [
+    {
+      "text": "figure is the artificial intelligence that made me smarter than you!"
+    }
+  ]
+}

@@ -1,76 +1,96 @@
 version: "3.1"
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+
 intents:
   - greet
   - goodbye
-  - query_time
-  - query_date
-  - query_weekday
-  - raise_your_hand
+  - chitchat
+  - raise_hand
+  - cancel_conversation
+  - mimic_my_hand
+
 entities:
-  - date
   - degree
   - time
+  - side
+
 slots:
-  date:
-    type: any
-    influence_conversation: false
-    mappings:
-        - type: custom
   degree:
     type: any
-    influence_conversation: false
     mappings:
-        - type: from_entity
-          entity: degree
-          role: target
+    - type: from_entity
+      entity: degree
   time:
     type: any
-    influence_conversation: false
     mappings:
-        - type: from_entity
-          entity: time
-          role: target
-  requested_slot_degree:
+    - type: from_entity
+      entity: time
+  side:
     type: any
     mappings:
-      - type: from_text
-        entity: degree
-  requested_slot_time:
-    type: any
-    mappings:
-      - type: from_text
-        entity: time
-    #     - type: custom
-  time_value:
-    type: any
-    influence_conversation: false
-    mappings:
-        - type: custom
-  degree_value:
-    type: any
-    influence_conversation: false
-    mappings:
-        - type: custom
+    - type: from_entity
+      entity: side
+
 responses:
+
+  utter_ask_degree:
+    - text: "how degree?"
+  utter_ask_degree_again:
+    - text: "degree not recognized, please re-enter a valid degree"
+
+  utter_ask_time:
+    - text: "How many time?"
+
+  utter_ask_side:
+    - text: "which side?"
+
+  utter_submit:
+    - text: "All done!"
+
+  utter_slots_values:
+    - text: "- degree: {degree}\n
+          - time: {time}
+          - side: {side}"
+
+  utter_cancelled:
+    - text: "Okay, the conversation has been cancelled. Feel free to start again."
+
   utter_greet:
-    - text: Hello, I’m Rajesh, I can check the time, date and day of the week for you. You can ask me "what time is it now?", "what day is today?" or "what day is tomorrow?"
+    - text: "Hey! How are you?"
+
   utter_goodbye:
-    - text: Goodbye!
-  # utter_query_bot:
-  #   - text: testinggggg
+    - text: "Bye"
+
+  utter_chitchat/ask_name:
+    - text: hey my name is jack!
+    - text: hello i'm jack!
+  utter_chitchat/greeting:
+    - text: hello man
+    - text: hey
+  utter_chitchat/ask_age:
+    - text: i'm 25 years old
+  utter_chitchat/ask_job:
+    - text: None of your business!
+  utter_chitchat/insisting_ask_job:
+    - text: Okay! I work for World of Business
+  utter_chitchat/ask_behavior:
+    - text: because you’re stupid, my name is written everywhere, and yet you’re asking me about my name!
+  utter_chitchat/ask_inventing:
+    - text: so what, I’ve got figure
+  utter_chitchat/ask_figure:
+    - text: figure is the artificial intelligence that made me smarter than you!
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
 actions:
-  - action_query_time
-  - action_query_date
-  - action_query_weekday
-  - action_query_bot
-  - action_bot_connect
-  - utter_goodbye
-  - utter_greet
+  - action_slots_values
+  - action_fallback
+  - action_mimic_hand
+  
 forms:
-  raise_form:
+  hand_form:
     required_slots:
       - degree
       - time
+      - side

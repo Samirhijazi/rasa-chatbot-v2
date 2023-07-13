@@ -1,53 +1,100 @@
 version: "3.1"
+
 nlu:
-  - intent: greet
-    examples: |
-      - Hello
-      - Hi
-  - intent: goodbye
-    examples: |
-      - ByeBye
-      - Bye
-      - good bye
-      - exit
-  - intent: query_time
-    examples: |
-      - What's the time now
-      - What's the time
-      - What time it is
-      - What time it is now
-      - When is it
-      - The time now
-  - intent: query_date
-    examples: |
-      - What's the date [today](date)
-      - What date is [today](date)
-      - [Today](date)'s date
-      - What date is [it](date)
-      - The date of [yesterday](date)
-      - What's the date of [tomorrow](date)
-  - intent: query_weekday
-    examples: |
-      - What day is [today](date)
-      - What day is it [today](date)
-      - What day of the week is [it](date)
-      - The day of the week
-      - Tell me what day is it [today](date)
-  # - intent: raise_your_hand
-  #   examples: |
-  #     - raise your hand [45](degree{45}) degrees
-  #     - raise your hand for [5](time{5}) seconds
-  #     - release your hand [90](degree{45}) degrees
-  #     - release your hand for [10](time{5}) minutes
-  #     - raise your hand
-  #     - up your arm [45](degree{45}) degrees
-  #     - up your hand for [2](time{5}) minutes
-  #     - up your hand [56](degree{45}) degrees
-  #     - up your hand for [12](time{5}) seconds
-  - intent: raise_your_hand
-    examples: |
-      - raise your hand [45 degrees](degree) for [5 seconds](time)
-      - raise your hand [90 degrees](degree) for [10 minutes](time)
-      - up your arm [45 degrees](degree) for [2 minutes](time)
-      - up your hand [56 degrees](degree) for [12 seconds](time)
-      - raise your hand
+- intent: raise_hand
+  examples: |
+    - raise your [left](side) hand [45 degrees](degree) for [5 seconds](time)
+    - raise your [left](side) hand [90 degrees](degree) for [10 minutes](time)
+    - up your [right](side) arm [45 degrees](degree) for [2 minutes](time)
+    - up your [right](side) hand [56 degrees](degree) for [12 seconds](time)
+    - raise your [left](side) hand
+    - raise your [right](side) hand
+
+- intent: cancel_conversation
+  examples: |
+    - cancel
+    - exit
+    - quit
+
+- intent: chitchat/ask_name
+  examples: |
+    - What is your name?
+    - May I know your name?
+    - What do people call you?
+    - Do you have a name for yourself?
+
+- intent: chitchat/ask_age
+  examples: |
+    - What is your age?
+    - how old are you?
+
+- intent: chitchat/greeting
+  examples: |
+    - Hello there
+    - Heyy
+    - Hi
+    - Good morning
+    - Good afternoon
+
+- intent: chitchat/ask_job
+  examples: |
+    - Where do you work?
+    - who do you belong to?
+    - what's your job?
+    - what do you do?
+
+- intent: chitchat/insisting_ask_job
+  examples: |
+    - Jack!
+
+- intent: chitchat/ask_behavior
+  examples: |
+    - Why are you talking to me like that?
+    - Why are you being mean!!
+
+- intent: chitchat/ask_inventing
+  examples: |
+    - are you calling me stupid? We’re the ones who invented you! I’ve got an extremely high thinking
+    - are you calling me stupid?
+    - i've got an extremely high thinking
+    - we're the ones who invented you!
+
+- intent: chitchat/ask_figure
+  examples: |
+    - What’s figure?
+
+- intent: mimic_my_hand
+  examples: |
+    - mimic my hand
+    - mimic my hand mouvement
+    - do my hand
+    - do my hand mouvement
+
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later

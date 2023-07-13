@@ -1,0 +1,37 @@
+version: "3.1"
+
+rules:
+  - rule: respond to chitchat
+    steps:
+      - intent: chitchat
+      - action: utter_chitchat
+
+  - rule: activate hand form
+    steps:
+      - intent: raise_hand
+      - action: hand_form
+      - active_loop: hand_form
+
+  - rule: submit form
+    condition:
+    - active_loop: hand_form
+    steps:
+      - action: hand_form
+      - active_loop: null
+      - action: utter_submit
+      - action: action_slots_values
+
+  - rule: conversation cancel
+    steps:
+      - intent: cancel_conversation
+      - action: action_fallback
+
+  - rule: good bye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: mimic my hand
+    steps:
+      - intent: mimic_my_hand
+      - action: action_mimic_hand

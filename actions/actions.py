@@ -1,115 +1,19 @@
-from typing import Any, Text, Dict, List
+from typing import Any, Text, Dict, List, Union
 from datetime import datetime, timedelta
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet
+from rasa_sdk.events import SlotSet, UserUtteranceReverted, ActionExecuted, Restarted
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.types import DomainDict
-from rasa_sdk.forms import FormValidationAction
-from rasa.core.agent import Agent
-import dateutil.parser
-#import spacy
 import re
-
-#nlp = spacy.load("en_core_web_sm")
-
-DEGREE_KEYWORDS = ["degrees"]
-TIME_KEYWORDS = ["seconds", "second", "minutes", "minute", "hours", "hour"]
-
-
-def text_date_to_int(text_date):
-    if text_date == "today":
-        return 0
-    if text_date == "tomorrow":
-        return 1
-    if text_date == "yesterday":
-        return -1
-    # in other case
-    return None
-
-
-weekday_mapping = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-
-
-def weekday_to_text(weekday):
-    return weekday_mapping[weekday]
-
-
-class ActionQueryTime(Action):
-    def name(self) -> Text:
-        return "action_query_time"
-
-    def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-
-        current_time = datetime.now().strftime("It's %H:%M %p.")
-        dispatcher.utter_message(text=current_time)
-
-        return []
-
-
-class ActionQueryDate(Action):
-    def name(self) -> Text:
-        return "action_query_date"
-
-    def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-        text_date = tracker.get_slot("date") or "today"
-
-        int_date = text_date_to_int(text_date)
-        if int_date is not None:
-            delta = timedelta(days=int_date)
-            current_date = datetime.now()
-
-            target_date = current_date + delta
-
-            dispatcher.utter_message(text=target_date.strftime("It's %B %d, %Y."))
-        else:
-            dispatcher.utter_message(text="The system currently doesn't support date query for '{}'".format(text_date))
-
-        return []
-
-
-class ActionQueryWeekday(Action):
-    def name(self) -> Text:
-        return "action_query_weekday"
-
-    def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-        text_date = tracker.get_slot("date") or "today"
-
-        int_date = text_date_to_int(text_date)
-        if int_date is not None:
-            delta = timedelta(days=int_date)
-            current_date = datetime.now()
-
-            target_date = current_date + delta
-
-            dispatcher.utter_message(text=weekday_to_text(target_date.weekday()))
-        else:
-            dispatcher.utter_message(text="The system currently doesn't support day of week query for '{}'".format(text_date))
-
-        return []
-    
-
+import pickle
+from actions.degree_model.bert_model import get_sentence_embedding
 
 import json
+    
 class ActionQueryBot(Action):
     def name(self) -> Text:
-        return "action_query_bot"
+        return "action_slots_values"
     
     def run(
             self,
@@ -118,92 +22,68 @@ class ActionQueryBot(Action):
             domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        intent_response = tracker.latest_message.get("text")
-        entities = tracker.latest_message.get("entities", [])
-        entity_info = [f"Entity: {entity['entity']} [{entity['value']}]" for entity in entities]
-        degree_entity = next(
-            (entity for entity in entities if entity["entity"] == "degree"), None
-        )
-        time_entity = next(
-            (entity for entity in entities if entity["entity"] == "time"), None
-        )
+        print(intent)
+        print(tracker.get_slot("degree"))
+        # check if the degrees entity contains one world (for example only the number 23)
+        degree_entity_one_word = bool(re.match(r'^\w+$', tracker.get_slot("degree")))
 
-        print("Degree Entity:", degree_entity)
-        print("Time Entity:", time_entity)
+        # Check if the required slots are filled or the degrees entity contains only the number
+        if not tracker.get_slot("degree") or degree_entity_one_word or not tracker.get_slot("time") or not tracker.get_slot("side"):
+            # If any of the required slots are missing, ask the user to provide the missing values
+            if not tracker.get_slot("degree") or degree_entity_one_word:
+                dispatcher.utter_message(template="utter_ask_degree")
+                return [SlotSet("requested_slot", "degree")]
+            elif not tracker.get_slot("time"):
+                dispatcher.utter_message(template="utter_ask_time")
+                return [SlotSet("requested_slot", "time")]
+            else:
+                dispatcher.utter_message(template="utter_ask_side")
+                return [SlotSet("requested_slot", "side")]
 
-        # dispatcher.utter_message(
-        #         text=f"The response."
-        #     )
-        # print("checking something")
-        # return "test"
-
-        if not degree_entity:
-            missing_entity = "degree"
-            dispatcher.utter_message(
-                text=f"The entity '{missing_entity}' is missing. Please provide the value for '{missing_entity}'."
-            )
-            return [SlotSet("requested_slot", "degree")]
-
-        if not time_entity:
-            missing_entity = "time"
-            dispatcher.utter_message(
-                text=f"The entity '{missing_entity}' is missing. Please provide the value for '{missing_entity}'."
-            )
-            return [SlotSet("requested_slot", "time")]
-
-        degree_value = degree_entity["value"]
-        time_value = time_entity["value"]
+        # Get the slot values
+        degree_value = tracker.get_slot("degree")
+        time_value = tracker.get_slot("time")
+        side_value = tracker.get_slot("side")
 
         # Handle degree entity
-        degree_info = process_degree_value(degree_value)
-        #dispatcher.utter_message(text=f"Degree Entity: {degree_entity['entity']} - {degree_info}")
+        degree_info = process_degree_value(degree_value, dispatcher)
+
+        # if the value returned from process_degree_value() is none, re ask for the degree entity
+        if degree_info is None:
+            return [SlotSet("requested_slot", "degree")]
 
         # Handle time entity
         time_info = resolve_time(time_value)
-        json_response = {degree_entity['entity']: degree_info, 
-                         time_entity['entity']: time_info,
+
+        #create a json array to store the data
+        json_response = {"text":f"I'm raising my {side_value} hand",
+                         "entities":{"side":side_value,"degree_value":degree_info,"time_value":time_info},
                          "intent": intent}
         json_response = json.dumps(json_response)
 
+        #send the json array
         dispatcher.utter_message(text=json_response)
 
-        return [
-            SlotSet("degree_value", degree_info),
-            SlotSet("time_value", time_info),
-        ]
+        #reset the slots for the new request
+        return [SlotSet("degree", None), SlotSet("time", None), SlotSet("side", None), SlotSet("requested_slot", None)]
 
-# class ActionQueryBot(Action):
-#     def name(self) -> Text:
-#         return "action_query_bot"
-    
-#     def run(
-#             self,
-#             dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]
-#     ) -> List[Dict[Text, Any]]:
-#         #user_message = tracker.latest_message.get("text")
-#         # intent = tracker.latest_message.get("intent", {}).get("name")
-#         # print("Bot says, ",end=' ')
-#         # for i in r.json():
-#         #     bot_message = i['text']
-#         #     print(f"{bot_message}")
-#         #dispatcher.utter_message(text=f"message: {user_message} llll")
+def process_degree_value(degree_value: str, dispatcher:CollectingDispatcher) -> str:
+    # load the model
+    with open('svm_model.pkl', 'rb') as file:
+        loaded_svm_model = pickle.load(file)
+        test_sentences = get_sentence_embedding([degree_value])
+        y_pred = loaded_svm_model.predict(test_sentences)
+        print(f"predict {y_pred[0]}")
 
-#         # Print the bot's response
-#         # for message in bot_response:
-#         #     print(message["text"])
-#         #     dispatcher.utter_message(
-#         #         text=f"The text is '{message['text']}'."
-#         #     )
-#         print('test ya test')
-#         dispatcher.utter_message(text= "test test test test test test")
-#         return []
-
-def process_degree_value(degree_value: str) -> str:
-    # Remove the 'degrees' keyword from the value
-    degree_value = degree_value.replace("degrees", "").strip()
-    return degree_value
+    #check if the pridicted degree is true
+    if y_pred[0] == 1:
+        # Remove the 'degrees' keyword from the value
+        degree_value = degree_value.replace("degrees", "").strip()
+        return degree_value
+    else:
+        # re-ask for degree entity
+        dispatcher.utter_message(template="utter_ask_degree_again")
+        return None
 
 def resolve_time(time_value: str) -> str:
     # Check if the value contains the word 'second' or 'seconds'
@@ -222,51 +102,57 @@ def resolve_time(time_value: str) -> str:
 
     return "Invalid time format"
 
-        # if degree_entity is not None and degree_entity['value']:
-        #     dispatcher.utter_message(text=f"intent: {intent} , [ {degree_entity['entity']} : {degree_entity['value']} ]")
-        # else:
-        #     missing_entity = "degree{45}"
-        #     dispatcher.utter_message(text=f"The entity '{missing_entity}' is missing. Please provide the value for '{missing_entity}'.")
-        #     return [SlotSet("requested_slot", missing_entity)]
-        #     # dispatcher.utter_message(text="entity missing")
 
-        # if time_entity is not None and time_entity['value']:
-        #     dispatcher.utter_message(text=f"Intent:{intent} , [ {time_entity['entity']} = {time_entity['value']} ]")
-        # else:
-        #     missing_entity = "time{5}"
-        #     dispatcher.utter_message(text=f"The entity '{missing_entity}' is missing. Please provide the value for '{missing_entity}'.")
-        #     return [SlotSet("requested_slot", missing_entity)]
-        # # dispatcher.utter_message(text=f"Intent: {intent}, {', '.join(entity_info)}")
+class ActionFallback(Action):
+    def name(self) -> Text:
+        return "action_fallback"
 
-        # return []
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        # Reset the slots and requested slot
+        events = [
+            SlotSet(slot, None) for slot in ["degree", "time", "side", "requested_slot"]
+        ] + [SlotSet("requested_slot", None)]
+
+        # Check if the latest user message was the cancel intent
+        if tracker.latest_message.get("intent", {}).get("name") == "cancel_conversation":
+            events += [
+                UserUtteranceReverted(),  # Revert the latest user message
+                SlotSet("degree", None),  # Reset the degree slot
+                SlotSet("time", None),  # Reset the time slot
+                SlotSet("side", None),  # Reset the side slot
+                SlotSet("requested_slot", None),  # Reset the requested_slot slot
+                Restarted(),  # Trigger a restart of the conversation
+                dispatcher.utter_message(template="utter_cancelled")  # Send cancellation message
+            ]
+        else:
+            events.append(ActionExecuted("action_listen"))  # Listen for user input
+
+        return events
     
+class ActionMimicHand(Action):
+    def name(self) -> Text:
+        return "action_mimic_hand"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    )->List[Dict[Text, Any]]:
+        # get the intent name
+        intent = tracker.latest_message.get("intent", {}).get("name")
 
+        #create a json array to store the data
+        json_response = {"text":"I'm mimicking your hand mouvement",
+                         "intent": intent}
+        json_response = json.dumps(json_response)
 
-        # intent = tracker.latest_message.get("intent", {}).get("name")
-        # entities = tracker.latest_message.get("entities", [])
-        # entity_info = [f"{entity['entity']} [{entity['value']}]" for entity in entities]
+        #send the json array
+        dispatcher.utter_message(text=json_response)
 
-        # degree_entity = next(
-        #     (entity for entity in entities if entity["entity"] == "degree{45}"), None
-        # )
-
-        # if not degree_entity:
-        #     # Ask the user to enter the degree
-        #     dispatcher.utter_message(text="Please enter the degree:")
-        #     return [SlotSet("requested_slot", "degree")]
-
-        # # Extract the degree value from the entity
-        # degree_value = degree_entity["value"]
-
-        # if degree_value:
-        #     # Print the intent and entity
-        #     dispatcher.utter_message(
-        #         text=f"Intent: {intent}, Entity: degree [{degree_value}], Entities: {', '.join(entity_info)}"
-        #     )
-        # else:
-        #     # Degree value is missing, ask the user to provide it
-        #     dispatcher.utter_message(text="Please enter a valid degree.")
-
-        # return [SlotSet("requested_slot", None)]
-
-
+        return []
