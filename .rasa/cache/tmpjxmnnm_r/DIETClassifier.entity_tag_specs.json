@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-degree",
+      "2": "I-degree",
+      "3": "L-degree",
+      "4": "U-degree",
+      "5": "B-side",
+      "6": "I-side",
+      "7": "L-side",
+      "8": "U-side",
+      "9": "B-time",
+      "10": "I-time",
+      "11": "L-time",
+      "12": "U-time",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-degree": 1,
+      "I-degree": 2,
+      "L-degree": 3,
+      "U-degree": 4,
+      "B-side": 5,
+      "I-side": 6,
+      "L-side": 7,
+      "U-side": 8,
+      "B-time": 9,
+      "I-time": 10,
+      "L-time": 11,
+      "U-time": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

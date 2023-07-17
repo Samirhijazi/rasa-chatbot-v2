@@ -10,7 +10,7 @@ import pickle
 from actions.degree_model.bert_model import get_sentence_embedding
 
 import json
-    
+
 class ActionQueryBot(Action):
     def name(self) -> Text:
         return "action_slots_values"

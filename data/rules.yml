@@ -18,7 +18,6 @@ rules:
     steps:
       - action: hand_form
       - active_loop: null
-      - action: utter_submit
       - action: action_slots_values
 
   - rule: conversation cancel
