@@ -26,6 +26,16 @@ rules:
       - intent: cancel_conversation
       - action: action_fallback
 
+  - rule: ask for name
+    steps:
+      - intent: ask_for_user_name
+      - action: action_ask_name
+
+  - rule: enter username
+    steps:
+      - intent: enter_user_name
+      - action: action_enter_username
+
   - rule: good bye
     steps:
       - intent: goodbye

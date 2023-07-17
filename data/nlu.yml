@@ -16,6 +16,16 @@ nlu:
     - exit
     - quit
 
+- intent: ask_for_user_name
+  examples: |
+    - name is not recognized
+
+- intent: enter_user_name
+  examples: |
+    - my name is [samir hijazi](username)
+    - call me [john steve](username)
+    - i'm [mark zor](username)
+
 - intent: chitchat/ask_name
   examples: |
     - What is your name?
@@ -69,32 +79,3 @@ nlu:
     - mimic my hand mouvement
     - do my hand
     - do my hand mouvement
-
-- intent: greet
-  examples: |
-    - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
-
-- intent: goodbye
-  examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later

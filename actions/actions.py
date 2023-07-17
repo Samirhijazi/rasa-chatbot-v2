@@ -156,3 +156,48 @@ class ActionMimicHand(Action):
         dispatcher.utter_message(text=json_response)
 
         return []
+
+class ActionAskName(Action):
+    def name(self) -> Text:
+        return "action_ask_name"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    )->List[Dict[Text, Any]]:
+        # get the intent name
+        intent = tracker.latest_message.get("intent", {}).get("name")
+
+        # bot ask the user to enter his name
+        dispatcher.utter_message(template="utter_ask_name")
+
+        return []
+
+class ActionEnterUsername(Action):
+    def name(self) -> Text:
+        return "action_enter_username"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    )-> List[Dict[Text, Any]]:
+        print(tracker.get_slot("username"))
+
+        return []
+    
+#for unexpected input
+class ActionDefaultFallback(Action):
+    def name(self) -> Text:
+        return "action_default_fallback"
+
+    def run(
+        self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text="I'm sorry, I didn't understand that. Could you please rephrase?")
+        return []
