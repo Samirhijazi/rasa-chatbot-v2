@@ -1,0 +1,33 @@
+version: "3.1"
+
+nlu:
+- intent: change_language
+  examples: |
+    - change language
+    - تغيير اللغة
+    - can you change the language?
+    - ممكن تغير اللغة
+    - change lang
+    - غيير اللغة
+    - cghange language
+    - i wanf to chanfe the lang
+    - change langauge
+    - change langgs
+    - i want to change lang
+- intent: set_language
+  examples: |
+    - Set language to [English](language)
+    - Set language to [Arabic](language)
+    - [english]{"entity": "language", "value": "English"}
+    - تحدث [englesh]{"entity": "language", "value": "English"}
+    - هل تتكلم ب[الإنجليزية]{"entity": "language", "value": "English"}؟
+    - {"entity": "language", "value": "English"}تغيير اللغة إلى اللغة [الإنجليزية]
+    - هل يمكنك التحدث ب[الإنجليزية]{"entity": "language", "value": "English"} من فضلك؟
+    - [الإنجليزية]{"entity": "language", "value": "English"}
+    - باللغة {"entity": "language", "value": "English"}[الانجليزية] من فضلك
+    - تحدث [الانجليزيه]{"entity": "language", "value": "English"}
+    - [arabic]{"entity": "language", "value": "Arabic"}
+    - do you speak [english]{"entity": "language", "value": "English"}?
+    - change language to [english]{"entity": "language", "value": "English"}
+    - [arab]{"entity": "language", "value": "Arabic"} plz
+    - talk [english]{"entity": "language", "value": "English"}

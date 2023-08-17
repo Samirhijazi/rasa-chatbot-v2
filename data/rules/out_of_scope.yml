@@ -1,0 +1,10 @@
+version: "3.1"
+
+rules:
+
+  - rule: out_of_scope
+    condition:
+    - active_loop: null
+    steps:
+      - intent: nlu_fallback
+      - action: action_default_fallback

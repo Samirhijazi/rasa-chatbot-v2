@@ -1,0 +1,107 @@
+version: "3.1"
+
+nlu:
+- intent: greeting
+  examples: |
+    - Hello there
+    - Heyy
+    - Hello
+    - Hola
+    - Howdy
+    - Bonjour
+    - Hi
+    - Good morning
+    - Good afternoon
+    - Salutations
+    - Greetings
+
+- intent: goodbye
+  examples: |
+    - Goodbye
+    - Bye
+    - See you later
+    - Take care
+    - Farewell
+    - Have a great day
+    - Bye bye
+    - Catch you later
+    - Talk to you later
+    - Until next time
+    - See you soon
+    - cu
+    - Au revoire
+    - see you
+
+- intent: thanks
+  examples: |
+    - Thanks!
+    - Thank you.
+    - Thanks a lot.
+    - Thank you so much.
+    - I appreciate it.
+    - Thanks for your help.
+    - Many thanks.
+    - You're the best!
+    - I'm grateful.
+    - I owe you one.
+    - Merci
+
+- intent: laugh
+  examples: |
+    - Oh, that's funny
+    - haha
+    - lol
+    - hehe
+    - ROFL
+    - That's funny
+    - I can't stop laughing
+    - hahaha
+    - LMAO
+    - Funny stuff
+    - It's hilarious
+    - Laughing out loud
+    - You're so funny
+    - Ha! Good one.
+    - You cracked me up
+    - Too funny
+    - Can't help but laugh
+    - Chuckle
+    - Laughter
+    - This is making me laugh
+
+- intent: dance
+  examples: |
+    - Dance
+    - Dance for me
+    - Can you dance?
+    - Show me a dance
+    - Let's dance
+    - I want to see you dance
+
+- intent: like
+  examples: |
+    - I like this.
+    - Give me a like.
+    - Can you give me a thumbs up?
+    - Please like this.
+    - Thumbs up!
+    - Like.
+    - Show some love.
+    - Hit the like button.
+
+- intent: take a photo
+  examples: |
+    - Take a photo
+    - Can you take a picture?
+    - Snap a photo
+    - Capture an image
+    - I want to take a picture
+    - Click a photo
+
+- intent: joke
+  examples: |
+    - Tell me a joke
+    - Can you tell me a joke?
+    - I want to hear a joke
+    - Give me a joke
+    - Joke time

@@ -1,0 +1,16 @@
+version: "3.1"
+
+nlu:
+
+# - intent: out_of_scope
+#   examples: |
+#     - what is the distance between moon and sun
+#     - what is python
+#     - who's the lebanon president
+#     - I want to order food
+#     - What is 2 + 2?
+#     - Who's the US President?
+#     - who is neil armestraung
+#     - how we can make tabboule
+#     - what is bmw car
+#     - what is the price of mercedes

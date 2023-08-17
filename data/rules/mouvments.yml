@@ -1,0 +1,42 @@
+version: "3.1"
+
+rules:
+  - rule: greetings mouvment
+    steps:
+      - intent: greeting
+      - action: action_greeting_mouvment
+
+  - rule: goodbye mouvment
+    steps:
+      - intent: goodbye
+      - action: action_goodbye_mouvment
+
+  - rule: thanks mouvment
+    steps:
+      - intent: thanks
+      - action: action_thanks_mouvment
+
+  - rule: laugh mouvment
+    steps:
+      - intent: laugh
+      - action: action_laugh_mouvment
+
+  - rule: dance mouvment
+    steps:
+      - intent: dance
+      - action: action_dance_mouvment
+
+  - rule: like mouvment
+    steps:
+      - intent: like
+      - action: action_like_mouvment
+
+  - rule: take photo mouvment
+    steps:
+      - intent: take a photo
+      - action: action_photo_mouvment
+
+  - rule: joke mouvment
+    steps:
+      - intent: joke
+      - action: action_joke_mouvment

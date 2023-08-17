@@ -1,0 +1,10 @@
+version: "3.1"
+
+nlu:
+
+- intent: mimic_my_hand
+  examples: |
+    - mimic my hand
+    - mimic my hand mouvement
+    - do my hand
+    - do my hand mouvement

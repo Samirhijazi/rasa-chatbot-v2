@@ -1,0 +1,384 @@
+version: "3.1"
+
+nlu:
+
+- intent: chitchat/ask_name
+  examples: |
+    - What is your name?
+    - May I know your name?
+    - What do people call you?
+    - Do you have a name for yourself?
+
+- intent: chitchat/ask_age
+  examples: |
+    - What is your age?
+    - how old are you?
+
+- intent: chitchat/ask_job
+  examples: |
+    - Where do you work?
+    - who do you belong to?
+    - what's your job?
+    - what do you do?
+    - What do you do for living?
+
+- intent: chitchat/insisting_ask_job
+  examples: |
+    - Jack!
+    - Jack, enough!
+
+- intent: chitchat/ask_behavior
+  examples: |
+    - Why are you talking to me like that?
+    - Why are you being mean!!
+
+- intent: chitchat/ask_inventing
+  examples: |
+    - are you calling me stupid? We’re the ones who invented you! I’ve got an extremely high thinking
+    - are you calling me stupid?
+    - i've got an extremely high thinking
+    - we're the ones who invented you!
+
+- intent: chitchat/ask_figure
+  examples: |
+    - What’s figure?
+
+- intent: chitchat/ask_create
+  examples: |
+    - We’ve created you, we humans have extraordinary brains
+
+- intent: chitchat/ask_fiqr
+  examples: |
+    - What is fIQr?!
+
+- intent: chitchat/what_nobel
+  examples: |
+    - Alright, if you think so, tell me… who’s nobel? And what is nobel’s prize?
+    - who is nobel?
+    - what is nobel's prize?
+
+- intent: chitchat/ask_religion
+  examples: |
+    - Alright, what’s your religion?
+    - your religion?
+    - are you a Muslim?
+    - are you a Christian?
+
+- intent: chitchat/not_answer
+  examples: |
+    - aren’t you answering?
+    - why didn't you reply?
+
+- intent: chitchat/ask_threatening
+  examples: |
+    - so you’re admitting that you’re threatening humans in workplace
+    - you are threatening humans in workplace
+
+- intent: chitchat/ask_fun
+  examples: |
+    - so you’ve left everything in the world, and still making fun of me?!
+    - you make fun of me?
+
+- intent: chitchat/ask_for_stop
+  examples: |
+    - You never stop!
+    - stop!
+    - can you stop?!
+
+- intent: chitchat/كيفك 
+  examples: |
+    - كيفك يا روبوت؟
+    - ما أخبارك ياروبوت؟
+    - هل أنت بخير ياروبوت؟
+
+
+- intent: chitchat/كيفك_jake
+  examples: |
+    - ايه والله! ماشي؛ كيفك جاك؟
+    - كيف الأحوال جاك؟
+
+
+- intent: chitchat/مبسوط؟ 
+  examples: |
+    - انت مبسوط؟
+    - هل أنت سعيد؟ 
+    - هل تشعر بالسرور؟
+
+
+- intent: chitchat/na3am 
+  examples: |
+    - ايه
+    - نعم
+    - طبعاً
+
+- intent: chitchat/intellegence
+  examples: |
+    - حلو كتير ...  هال بدنا نختبر مدى ذكاء هالروبوت الجاك لنشوف مين فينا راح يكمل لالخير بدون ما يفقد طاقته.سين سؤال .. أديه نسبة ذكائك ؟
+    - هل لديك ذكاء عالي؟
+    - هل تعتبر نفسك ذكيًّا؟
+    - هل تمتلك مستوى ذكاء جيد؟ 
+    - أديه نسبة ذكائك ؟
+
+
+- intent: chitchat/sure_ar
+  examples: |
+    - متأكد من هالشي؟!
+    - هل أنت متأكد جدًا؟ 
+    - أنت واثق من ذلك؟
+
+
+- intent: chitchat/t2na3
+  examples: |
+    - و كيف بدك تقنعني؟ !
+    - و ما الدليل؟
+    - و ليش يجب علي أن أقتنع؟
+    - و هل هناك أمثلة سابقة تدعم هذا الرأي؟
+
+
+- intent: chitchat/give_details
+  examples: |
+    - وشو يعنى هذا ما بيكون اثبات   
+    - هذا ليس دليل كافياً للاثبات
+    - هذا ما بيكون اثبات 
+
+
+- intent: chitchat/IKnow
+  examples: |
+    -لا  بعرفه بعرفه ... بس سؤال تانى انت راح تضل معنا كتير هون؟؟  
+    - هل ستبقى معنا لوقت طويل؟
+    -هل سيبقى تواجدك معنا لفترة؟
+    - انت راح تضل معنا كتير هون؟
+
+
+- intent: chitchat/notOkay
+  examples: |
+    - اجاباتك مثل الروبوتات ماشاءالله عليك...
+    -جابات الروبوتات متكررة وغير مبتكرة
+
+
+- intent: chitchat/Question1
+  examples: |
+    - سؤال يا جاك اذا سمحت  
+    - هل يمكنني أن أسأل سؤال؟
+    - هل يمكنك الإجابة على سؤالي؟
+
+
+- intent: chitchat/take
+  examples: |
+    - فينى اخدك معى عالبيت حتى تخدمنى؟ 
+    - هل بإمكانك مرافقتي إلى البيت لتقديم المساعدة؟  
+    - إذا أتيت معي إلى المنزل، هل تستطيع مساعدتي؟
+
+- intent: chitchat/hi
+  examples: |
+    - مرحبًا يا روبوت
+    - مرحبًا يا صوت الذكاء الاصطناعي 
+    - مساء الخير، أيها الروبوت
+
+
+- intent: chitchat/how_are_you
+  examples: |
+    - كيف حالك؟
+    - كيفك؟
+    - ما أخبارك 
+    - هل أنت بخير ؟
+
+
+- intent: chitchat/good
+  examples: |
+    - الحمد لله
+    - أشكر الله على كل شي
+    - أنا بخير
+    - أنا بأتم الصحة
+
+
+- intent: chitchat/start
+  examples: |
+    - اليوم جيت بدي أختبر ذكائك...بما أنه الكثير عم يقولوا عنك ذكي.
+    - لقد حان الوقت لاختبار ذكائك، وذلك بما أن الكثيرون يشيدون بذكائك
+    - لنرى مدى ذكائك. الكثيرون يعتبرونك واحدًا من الأذكياء
+    - اليوم جيت بدي أختبر ذكائك
+
+
+- intent: chitchat/ease
+  examples: |
+    - طيب...رح بلش معك بأسألة سهلة!
+    - جيد، سأطرح بعض الأسئلة السهلة أولاً
+
+
+- intent: chitchat/Question_2
+  examples: |
+    - قديش عدد الثواني في الشهر؟
+
+
+- intent: chitchat/Reponse_2
+  examples: |
+    - فعلاً هيدا الجواب الصحيح ... هلأ رح جرّب سؤال أصعب شوي 
+    - بالفعل، هذا هو الإجابة الصحيحة... هلأ رح جرّب سؤال أصعب
+    - أحسنت، لقد تمكنت من الإجابة الصحيح ... هلأ رح جرّب سؤال أصعب
+    - فعَّلً هيدا الجواب الصحيح...
+    - هلأ رح جرّب سؤال أصعب شوي
+
+
+- intent: chitchat/Question_3
+  examples: |
+    - مين هو أول إنسان طار للفضاء؟! 
+    - أول شخص طار إلى الفضاء هو من؟
+    - من هو الرائد الذي قام بأول رحلة إلى الفضاء؟
+
+
+- intent: chitchat/Greatt
+  examples: |
+    - والله عجبتني فعلاً.....و هلأ رح أسألك السؤال الأخير و إذا جاوبت عليه رح اعترف بذكائك.... السؤال هو: شو هي أصغر عضمة بجسم الإنسان؟ 
+    - فعلاً، لقد لفت انتباهي بالفعل....هل أنت مستعد لسؤال التحدي السؤال هو: شو هي أصغر عضمة بجسم الإنسان
+    - إجاباتك تشير إلى مستوى عالي من الذكاء...عندما تجيب على هذا، سأكون متأكدًا من ذكائك السؤال هو: شو هي أصغر عضمة بجسم الإنسان
+    -  السؤال هو: شو هي أصغر عضمة بجسم الإنسان
+
+
+- intent: chitchat/Final_2
+  examples: |
+    - لا أكيد أصلاً هول كلن بعرفن أنا
+    - أعلم كل الإجابات على الأسئلة جيدًا
+    - أدرك كل الإجابات على الأسئلة بدقة
+
+
+- intent: chitchat/Do
+  examples: |
+    - شُو فِيكْ تَعْمِلْ
+    - شُو عِنْدَكْ جَدِيد؟
+    - شو فيك تعمل
+
+
+- intent: chitchat/Your_Name
+  examples: |
+    - شُو إسْمِي؟
+    - بتقدر تخبروني إسمي؟
+    - هل تقدر تخبرني كيف بينادوني؟
+
+
+- intent: chitchat/Question3
+  examples: |
+    - آه، شُو هِيَ أَكْبَرْ دَوْلِة بِالْعَالَمْ ؟
+    - هل لديك فكرة عن الدولة الأكبر في العالم؟
+    - هل بإمكانك مساعدتي في معرفة أكبر دولة على وجه الأرض ؟
+
+
+- intent: chitchat/ease3
+  examples: |
+    - حِلُو، بَسْ هَيْدَا سُؤَالْ سَهِلْ
+    - ممتاز، هذا سؤال بسيط جداً
+    - ممتع، بس هذا السؤال سهل للغاية
+    - حلو، بس هيدا سؤال سهل
+
+- intent: chitchat/Question3_2
+  examples: |
+    - هِمممم، مِينَ إكْتَشَفْ أَمْرِيكا؟  
+    - هِمْمْ، مَنْ كَان أَوَّل مُكْتَشِف لَلأَرَاضِي الأَمْرِيكِيَّة؟
+    - همممم، مين إكتشف أمريكا؟
+
+
+- intent: chitchat/Question3_3
+  examples: |
+    - تَارِيخْ مِيلادْ عَادِلْ إِمَامْ ؟
+    - مَتَى وُلِدْ الفَنَّانْ عَادِلْ إِمَامْ؟
+    - هَل يُمْكِنُكَ إِعْطَائِي تَارِيخْ مِيلادْ عَادِلْ إِمَامْ؟
+    - تاريخ ميلاد عادل إمام؟
+
+
+- intent: chitchat/Question3_4
+  examples: |
+    - إِسِمْ زَوْجِة فَرْعُونْ ؟
+    - هَل تَعْرِفُ مَنْ هِيَ زَوْجَةُ فِرْعَوْنْ؟
+    - مَنْ هِيَ السَّيِّدَةُ التِّي تَزَوَّجَهَا فِرْعَوْنْ؟
+    - إِسم زوجة فرعون؟
+
+
+- intent: chitchat/Question3_5
+  examples: |
+    - شُو تُغَدِّيتْ أَنا مْبَارِحْ ؟
+    - أَنا مْبَارِحْ شُو تعشيت؟ 
+    -  هل تستطيع تذكيري بما تناولته للعشاء اليوم؟ 
+    - شو تناولت للفطور اليوم؟
+    - شو تغديت أنا مبارح ؟
+
+# - intent: chitchat/كيفك 
+#   examples: |
+#     - كيفك يا روبوت؟
+#     - ما أخبارك ياروبوت؟
+#     - هل أنت بخير ياروبوت؟
+#     - مرحبًا يا روبوت! كيف تسير الأمور؟
+
+
+# - intent: chitchat/كيفك جاك؟
+#   examples: |
+#     - ايه والله! ماشي؛ كيفك جاك؟
+#     -ما شاء الله! أنا تمام؛ وأنت كيف حالك؟
+#     - الحمدلله؛ كيف الأحوال جاك؟
+
+
+# - intent: chitchat/مبسوط؟ 
+#   examples: |
+#     - انت مبسوط؟
+#     - هل أنت سعيد؟ 
+#     - هل تشعر بالسرور؟
+
+
+# - intent: chitchat/na3am 
+#   examples: |
+#     - ايه
+#     - نعم
+#     - طبعاً
+
+# - intent: chitchat/intellegence
+#   examples: |
+#     - حلو كتير ...  هال بدنا نختبر مدى ذكاء هالروبوت الجاك لنشوف مين فينا راح يكمل لالخير بدون ما يفقد طاقته.سين سؤال .. أديه نسبة ذكائك ؟؟
+#     - مرحبًا يا روبوت، هل يمكنك الإجابة على سؤال صعب؟
+#     - هل لديك ذكاء عالي؟
+#     - هل تعتبر نفسك ذكيًّا؟
+#     - هل تمتلك مستوى ذكاء جيد؟ 
+
+# - intent: chitchat/sure_ar
+#   examples: |
+#     - متأكد من هالشي؟!
+#     - هل أنت متأكد جدًا؟ 
+#     - أنت واثق من ذلك؟
+
+# - intent: chitchat/t2na3
+#   examples: |
+#     - و كيف بدك تقنعني؟ !
+#     - و ما الدليل؟
+#     - و ليش يجب علي أن أقتنع؟
+#     - و هل هناك أمثلة سابقة تدعم هذا الرأي؟
+
+
+# - intent: chitchat/give_details
+#   examples: |
+#     - وشو يعنى هذا ما بيكون اثبات   
+#     - هذا ليس دليل كافياً للاثبات
+
+
+# - intent: chitchat/IKnow
+#   examples: |
+#     -لا  بعرفه بعرفه ... بس سؤال تانى انت راح تضل معنا كتير هون؟؟  
+#     - هل ستبقى معنا لوقت طويل؟
+#     -هل سيبقى تواجدك معنا لفترة؟
+
+
+# - intent: chitchat/notOkay
+#   examples: |
+#     - اجاباتك مثل الروبوتات ماشاءالله عليك...
+#     -جابات الروبوتات متكررة وغير مبتكرة
+
+
+# - intent: chitchat/Question
+#   examples: |
+#     - سؤال يا جاك اذا سمحت  
+#     - هل يمكنني أن أسأل سؤال؟
+#     - لو سمحت، هل يمكنك الإجابة على سؤالي؟
+
+
+# - intent: chitchat/take
+#   examples: |
+#     - فينى اخدك معى عالبيت حتى تخدمنى؟ 
+#     - هل بإمكانك مرافقتي إلى البيت لتقديم المساعدة؟  
+#     - إذا أتيت معي إلى المنزل، هل تستطيع مساعدتي؟

@@ -1,0 +1,25 @@
+version: "3.1"
+
+rules:
+
+# for username asking
+  # - rule: activate username form
+  #   steps:
+  #     - intent: ask_for_user_name
+  #     - action: username_form
+  #     - active_loop: username_form
+
+  # - rule: submit username form
+  #   condition:
+  #   - active_loop: username_form
+  #   steps:
+  #     - action: username_form
+  #     - active_loop: null
+  #     - action: action_username_value
+
+  # - rule: user provides name
+  #   steps:
+  #     - intent: ask_for_user_name
+  #       slot_was_set:
+  #         - requested_slot: username
+  #     - action: action_username_value

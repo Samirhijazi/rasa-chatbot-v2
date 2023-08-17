@@ -1,0 +1,17 @@
+version: "3.1"
+
+rules:
+
+  - rule: activate hand form
+    steps:
+      - intent: raise_hand
+      - action: hand_form
+      - active_loop: hand_form
+
+  - rule: submit form
+    condition:
+    - active_loop: hand_form
+    steps:
+      - action: hand_form
+      - active_loop: null
+      - action: action_slots_values

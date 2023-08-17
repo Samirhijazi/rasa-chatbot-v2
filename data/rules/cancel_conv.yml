@@ -1,0 +1,8 @@
+version: "3.1"
+
+rules:
+
+  - rule: conversation cancel
+    steps:
+      - intent: cancel_conversation
+      - action: action_fallback
