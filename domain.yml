@@ -18,12 +18,15 @@ intents:
   - like
   - take a photo
   - joke
+  - rock_paper_seaser
+  - provide_information
 
 entities:
   - degree
   - time
   - side
-  - username
+  - category
+  # - username
   # - username_confirmation
 
 slots:
@@ -44,15 +47,32 @@ slots:
       entity: side
   username:
     type: text
+    influence_conversation: true
     mappings:
-    - type: custom
-  # username_confirmation:
-  #   type: text
-  #   mappings:
-  #   - type: from_entity
-  #     entity: username_confirmation
+    - type: from_text
+      conditions:
+      - active_loop: username_form
+        requested_slot: username
+
+  username_confirmation:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: username_form
+        requested_slot: username_confirmation
+
+  category:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: category
 
 responses:
+
+  utter_username_values:
+    - text: "username is {username}, confirmation is {username_confirmation}"
 
   utter_ask_degree:
     - text: "how degree?"
@@ -189,6 +209,13 @@ responses:
   utter_ask_language:
     - text: you want to change language
 
+  utter_provide_information:
+    - text: "I'll talk with you about {category}, so feel free to ask anything related to this topic"
+  
+  utter_ask_category:
+    - text: "please choose a specific category"
+
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
@@ -197,12 +224,9 @@ actions:
   - action_slots_values
   - action_fallback
   - action_mimic_hand
-  - action_enter_username
-  - action_capture_username
   - action_greet_user
   - action_username_value
   - action_slot_value
-  - validate_username_form
   - action_greeting_mouvment
   - action_goodbye_mouvment
   - action_thanks_mouvment
@@ -212,6 +236,8 @@ actions:
   - action_photo_mouvment
   - action_joke_mouvment
   - action_default_fallback
+  - action_rockpaper_game
+  - action_provide_information
   
 forms:
   hand_form:
@@ -220,4 +246,7 @@ forms:
   username_form:
     required_slots:
       - username
-      # - username_confirmation
+      - username_confirmation
+  category_form:
+    required_slots:
+      - category

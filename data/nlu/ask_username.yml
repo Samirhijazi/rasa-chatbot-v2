@@ -6,3 +6,5 @@ nlu:
   examples: |
     - name is not recognized
     - name not exist
+    - your name is not exist
+    - your name is not recognized

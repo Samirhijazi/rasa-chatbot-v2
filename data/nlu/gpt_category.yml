@@ -1,0 +1,10 @@
+version: "3.1"
+
+nlu:
+
+- intent: provide_information
+  examples: |
+    - Talk with me as [science](category)
+    - Talk with me as [finance](category)
+    - Talk with me as [computer science](category)
+    - Talk with me as [psycology](category)
