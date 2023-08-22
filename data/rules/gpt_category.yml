@@ -15,3 +15,10 @@ rules:
       - action: category_form
       - active_loop: null
       - action: action_provide_information
+
+
+
+  - rule: general information
+    steps:
+      - intent: general_information 
+      - action: action_generale_information

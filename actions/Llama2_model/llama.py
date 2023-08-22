@@ -1,5 +1,5 @@
-import streamlit as st
-import replicate
+#import streamlit as st
+#import replicate
 import os
 
 class Llama:

@@ -6,12 +6,11 @@ from rasa_sdk.events import SlotSet, UserUtteranceReverted, ActionExecuted, Rest
 from rasa_sdk.forms import FormValidationAction
 import re
 import pickle
-import random
-import streamlit as st    
+import random  
 from actions.degree_model.bert_model import get_sentence_embedding
 from actions.chatGPT.chatgpt import GPT3
 from actions.Llama2_model.llama import Llama
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import json
 import spacy
 
@@ -60,7 +59,7 @@ class ActionQueryBot(Action):
 
         # Handle time entity
         time_info = resolve_time(time_value)
-
+    
         #create a json array to store the data
         json_response = {"text":f"I'm raising my {side_value} hand",
                         "entities":{"side":side_value,"degree_value":degree_info,"time_value":time_info},
@@ -485,6 +484,7 @@ class ActionGreetUser(Action):
 
         return []
     
+    
 import socket
 class ActionLlama(Action):
     def name(self) -> Text:
@@ -503,17 +503,15 @@ class ActionLlama(Action):
             
             message = tracker.latest_message.get('text')
             category = tracker.get_slot("category")
-            # Create a dictionary to store the category
+            # Create a dictionary with both message and category
             data = {
+                "message": message,
                 "category": category
             }
-            
-            # Serialize the dictionary as JSON
-            data_json = json.dumps(data)
 
-            # Send the message to the server
-            client_socket.send(message.encode("utf-8"))
-            client_socket.send(data_json.encode("utf-8"))
+            # Send the data as JSON to the server
+            json_data = json.dumps(data)
+            client_socket.send(json_data.encode("utf-8"))
 
 
             # Receive and print the response from the server
@@ -523,8 +521,9 @@ class ActionLlama(Action):
                 "intent": intent_name,
                 "gpt_response": response
             }
-            json_response = json.dumps(json_response)
-            dispatcher.utter_message(text=json_response)
+            
+            dispatcher.utter_message(text=json.dumps(json_response))   
+
         except Exception as e:
             print("Error:", str(e))
         finally:
@@ -605,5 +604,52 @@ class ActionProvideInfo(Action):
         domain: Dict[Text, Any],
     )-> List[Dict[Text, Any]]:
         print(f"category slot: {tracker.get_slot('category')}")
-        dispatcher.utter_message(template="utter_provide_information")
+        dispatcher.utter_message(response="utter_provide_information")
+        return []
+    
+    
+class ActiongenraleInfo(Action):
+    def name(self) -> Text:
+        return "action_generale_information"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    )-> List[Dict[Text, Any]]:
+        print("slot is empty new")
+        return [SlotSet("category", None)]
+ 
+class ActionVoice(Action):
+    def name(self) -> Text:
+        return "action_voice"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    )-> List[Dict[Text, Any]]:
+        entites = 2
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        text = "المطبخْ. الحمّامْ.."
+        json_array = {
+                       "text": text,
+                       "entites" : entites,
+                       "intent" : intent
+        } 
+        json_voice = json.dumps(json_array)
+        dispatcher.utter_message(json_voice)
+        return[]
+    
+    
+    
+# actions.py
+class ActionGenerateResponseAr(Action):
+    def name(self) -> Text:
+        return "action_generate_response_ar"
+
+    def run(self, dispatcher, tracker, domain):
+        print("arabic")
         return []
