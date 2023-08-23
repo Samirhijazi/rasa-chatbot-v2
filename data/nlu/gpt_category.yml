@@ -4,7 +4,31 @@ nlu:
 
 - intent: provide_information
   examples: |
-    - Talk with me as [science](category)
+    - Talk with me as [scientist](category)
     - Talk with me as [finance](category)
-    - Talk with me as [computer science](category)
+    - Talk with me as [computer scientist](category)
     - Talk with me as [psycology](category)
+    - Talk with me as [social media](category)
+    - Talk with me as [Nutritionist](category)
+    - Talk with me as [interior designer](category)
+    - Talk with me as [Time manager](category) 
+    - Talk with me as [Fitness](category) 
+    - Talk with me as [Event planner](category) 
+    - Talk with me as [technologist](category) 
+    - Talk with me as [mathematical](category)
+    - Talk with me as [weather](category)
+    - Talk with me as [famous musicians](category)
+    - Talk with me as [artist](category)
+    - Talk with me as [cooker](category)
+    - Talk with me as [health and wellness](category)
+    - Talk with me as [fashion](category)
+    - Talk with me as [photographer](category)
+    - Talk with me as [famous authors](category)
+    - Talk with me as [travelist](category) 
+    - Talk with me as [architecture](category)
+    - Talk with me as [musicien](category)
+
+- intent: general_information 
+  examples: |
+    - give me the response in general
+    - respond to me without specific category

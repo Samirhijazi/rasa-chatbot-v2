@@ -3,6 +3,7 @@ version: "3.1"
 intents:
   - chitchat
   - raise_hand
+  - raise_hand_ar
   - cancel_conversation
   - mimic_my_hand
   - ask_for_user_name
@@ -20,6 +21,7 @@ intents:
   - joke
   - rock_paper_seaser
   - provide_information
+  - general_information
 
 entities:
   - degree
@@ -53,7 +55,13 @@ slots:
       conditions:
       - active_loop: username_form
         requested_slot: username
-
+  # username_value:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_text
+  #     conditions:
+  #     - active_loop: null
   username_confirmation:
     type: text
     influence_conversation: true
@@ -238,6 +246,7 @@ actions:
   - action_default_fallback
   - action_rockpaper_game
   - action_provide_information
+  - action_generale_information
   
 forms:
   hand_form:

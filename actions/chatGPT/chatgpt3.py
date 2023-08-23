@@ -6,14 +6,12 @@ import time
 import socket
 
 # Set your OpenAI API key
-api_key = "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"
+api_key = "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"
 openai.api_key = api_key
-
 # Define the previous conversation (if any)
 previous_conversation = [
     {'role': 'system', 'content': 'You are a helpful assistant.'}
 ]
-
 def send_response(msg):
     start_time = time.time()
     previous_conversation.append({'role': 'user', 'content': msg})
@@ -68,19 +66,23 @@ while True:
     while True:
         try:
             data = client_socket.recv(1024).decode("utf-8")
-            
+            print(f"data: {data}")
             if not data:
                 print("Connection closed by client")
                 break
 
             print(f"Received data: {data}")
 
-            categories_data = client_socket.recv(1024).decode("utf-8")
-            categories = json.loads(categories_data)
-            print(categories)
-
+            # categories_data = client_socket.recv(1024).decode("utf-8")
+            # categories = json.loads(categories_data)
+            categories = {
+                "category": "science"
+            }
+            # categories = json.dumps(categories)
+            # print(categories)
+            
             # Process the data and send the response
-            response = specifique(data,[categories_data])
+            response = specifique(data,[categories])
 
             # Send the response back to the client
             client_socket.send(response.encode("utf-8"))

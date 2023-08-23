@@ -11,7 +11,7 @@ import streamlit as st
 from actions.degree_model.bert_model import get_sentence_embedding
 from actions.chatGPT.chatgpt import GPT3
 from actions.Llama2_model.llama import Llama
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import json
 import spacy
 
@@ -61,8 +61,15 @@ class ActionQueryBot(Action):
         # Handle time entity
         time_info = resolve_time(time_value)
 
+        #check intent to send the response according to the language
+        if intent == "raise_hand":
+            text = f"I'm raising my {side_value} hand"
+        else:
+            text = f"رح علي ايدي {side_value}"
+        print(f"text {text}")
         #create a json array to store the data
-        json_response = {"text":f"I'm raising my {side_value} hand",
+        json_response = {"text": text,
+                        # "text":f"I'm raising my {side_value} hand",
                         "entities":{"side":side_value,"degree_value":degree_info,"time_value":time_info},
                         "intent": intent,
                         "inputHint": "acceptingInput"}
@@ -85,8 +92,10 @@ def process_degree_value(degree_value: str, dispatcher:CollectingDispatcher) -> 
     #check if the pridicted degree is true
     if y_pred[0] == 1:
         # Remove the 'degrees' keyword from the value
-        degree_value = degree_value.replace("degrees", "").strip()
-        return int(degree_value)
+        # degree_value = degree_value.replace("degrees", "").strip()
+        words = degree_value.split()
+        number_value = words[0]
+        return int(number_value)
     else:
         # re-ask for degree entity
         dispatcher.utter_message(template="utter_ask_degree_again")
@@ -94,18 +103,18 @@ def process_degree_value(degree_value: str, dispatcher:CollectingDispatcher) -> 
 
 def resolve_time(time_value: str) -> str:
     # Check if the value contains the word 'second' or 'seconds'
-    if "second" in time_value:
-        return "00:00:" + re.findall(r"\d+", time_value)[0].zfill(2)
+    # if "second" in time_value:
+    return "00:00:" + re.findall(r"\d+", time_value)[0].zfill(2)
 
     # Check if the value contains the word 'minute' or 'minutes'
-    if "minute" in time_value:
-        minutes = re.findall(r"\d+", time_value)[0]
-        return "00:" + minutes.zfill(2) + ":00"
+    # if "minute" in time_value:
+    #     minutes = re.findall(r"\d+", time_value)[0]
+    #     return "00:" + minutes.zfill(2) + ":00"
 
     # Check if the value contains the word 'hour' or 'hours'
-    if "hour" in time_value:
-        hours = re.findall(r"\d+", time_value)[0]
-        return hours.zfill(2) + ":00:00"
+    # if "hour" in time_value:
+    #     hours = re.findall(r"\d+", time_value)[0]
+    #     return hours.zfill(2) + ":00:00"
 
     return "Invalid time format"
 
@@ -390,7 +399,6 @@ class ActionMimicHand(Action):
 #             return {"username": tracker.latest_message.get("text")}
 #         # return {"username": None}
     
-
 class ActionUsernameValue(Action):
     def name(self) -> Text:
         return "action_username_value"
@@ -401,41 +409,43 @@ class ActionUsernameValue(Action):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        # return [SlotSet("username", None), SlotSet("username_confirmation", None)]
+        # get  the values of username and confirmation slots
+        # if tracker.get_slot("username_value"):
+        #     username_slot = tracker.get_slot("username_value")
+        # else:
         username_slot = tracker.get_slot("username")
+        print(f"username value {username_slot}")
         username_confirm = tracker.get_slot("username_confirmation")
-
-        dispatcher.utter_message(f"in username action, username={username_slot}, confirmation = {username_confirm}")
-        #check if the entry is a name using model (check_username_model(text))
-        #if true save it in the slot
-        # if text == "samir": #replace this by if the returned value of the model is true
-        #     SlotSet("username",text)
-        # else:
-        #     dispatcher.utter_message(template="utter_ask_username")
-        #     return [SlotSet("requested_slot", "username")]
-        #check if the entry is a name using model (check_username_confirm_model(text))
-        #if true save it in the slot
-        # if text == "yes": #replace this by if the returned value of the model is true
-        #     SlotSet("username_confirmation", text)
-        # else:
-        #     dispatcher.utter_message(template="utter_ask_username_confirmation")
-        #     return [SlotSet("requested_slot", "username_confirmation")]
         
-        return [SlotSet("username", None),SlotSet("username_confirmation", None)]
+        # load the model of username
+        username_slot = nlp1(username_slot)
+        username_slot = str(username_slot.ents[0])
+        if len(username_slot) == 0:
+            return [SlotSet("requested_slot", "username")]
+        
+        # load the model of confirmation
+        confirm_pred = get_confirmation_pred(username_confirm,tracker)
+        if confirm_pred is None:
+            dispatcher.utter_message(text="give me 'name is not recognized' to retry the scenario")
+            return [SlotSet("username", None), SlotSet("username_confirmation", None)]
 
-def username_confirmation(dispatcher, tracker):
-    confirm = tracker.get_slot("username_confirmation")
-    if confirm:
-        print("---------- in username confirmation ----------")
-        if confirm.lower() == "yes":
-            return "yes"
-        else:
-            return "no"
-    
-    print("in not confirm")
-    # dispatcher.utter_message(template="utter_ask_username_confirmation")
-    return [FollowupAction("action_get_user_confirmation")]
-    
+        # reset the username and confirmation slots
+        dispatcher.utter_message(text=f"Hello {username_slot}")
+        return [SlotSet("username",None), SlotSet("username_confirmation", None)]
+        
+def get_confirmation_pred(confirm_value: str,tracker:Tracker) -> str:
+    # load the model
+    with open('confirm_model.pkl', 'rb') as file:
+        loaded_svm_model = pickle.load(file)
+        test_sentences = get_sentence_embedding([confirm_value])
+        y_pred = loaded_svm_model.predict(test_sentences)
+        print(f"predict {y_pred[0]}")
+
+    if y_pred[0] == 1:
+        return 1
+    else:
+        return None
+
 class ActionGetUserConfirmation(Action):
     def name(self) -> Text:
         return "action_get_user_confirmation"
@@ -504,17 +514,17 @@ class ActionLlama(Action):
             message = tracker.latest_message.get('text')
             category = tracker.get_slot("category")
             # Create a dictionary to store the category
-            data = {
-                "category": category
-            }
+            # data = {"category": category}
+            # # Serialize the dictionary as JSON
+            # data_json = json.dumps(data)
             
-            # Serialize the dictionary as JSON
-            data_json = json.dumps(data)
+            # combined_data = f"{message}\n{data_json}"
+            # client_socket.send(combined_data.encode("utf-8"))
 
             # Send the message to the server
             client_socket.send(message.encode("utf-8"))
-            client_socket.send(data_json.encode("utf-8"))
-
+            # if category is not None:
+            #     client_socket.send(category.encode("utf-8"))
 
             # Receive and print the response from the server
             response = client_socket.recv(1024).decode("utf-8")
@@ -607,3 +617,16 @@ class ActionProvideInfo(Action):
         print(f"category slot: {tracker.get_slot('category')}")
         dispatcher.utter_message(template="utter_provide_information")
         return []
+    
+class ActiongenraleInfo(Action):
+    def name(self) -> Text:
+        return "action_generale_information"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    )-> List[Dict[Text, Any]]:
+        print("slot is empty new")
+        return [SlotSet("category",None)]

@@ -5,11 +5,28 @@ nlu:
 - intent: raise_hand
   examples: |
     - raise your [left](side) hand [45 degrees](degree) for [5 seconds](time)
-    - raise your [left](side) hand [90 degrees](degree) for [10 minutes](time)
+    - raise your [left](side) hand [90 degrees](degree) for [10 seconds](time)
     - raise your [both](side) hand [120 degrees](degree) for [5 seconds](time)
-    - raise your [both](side) hand [100 degrees](degree) for [2 minutes](time)
-    - up your [right](side) arm [45 degrees](degree) for [2 minutes](time)
+    - raise your [both](side) hand [100 degrees](degree) for [2 seconds](time)
+    - up your [right](side) arm [45 degrees](degree) for [2 seconds](time)
     - up your [right](side) hand [56 degrees](degree) for [12 seconds](time)
     - raise your [left](side) hand
     - raise your [both](side) hand
     - raise your [right](side) hand
+
+- intent: raise_hand_ar
+  examples: |
+    - ارفع يدك [الشمال](side) [45 درجة](degree) لمدة [10 ثواني](time)
+    - ارفع يدك [اليمين](side) [45 زاوية](degree) لمدة [20 ثانية](time)
+    - ارفع يدك [الاثنين](side) [45 درجة](degree) لمدة [12 ثانية](time)
+    - علي ايدك [اليمين](side) [45 زاوية](degree) لمدة [2 ثواني](time)
+    - علي ايدك [اليسار](side) [45 درجة](degree) لمدة [4 ثواني](time)
+    - علي ايدك [الاثنين](side) [45 زاوية](degree) لمدة [2 ثواني](time)
+    - علي ايدك [اليمين](side)
+    - علي ايدك [اليسار](side)
+    - علي ايدك [الشمال](side)
+    - علي ايدك [الاثنين](side)
+    - ارفع يدك [اليمين](side)
+    - ارفع يدك [اليسار](side)
+    - ارفع يدك [الشمال](side)
+    - ارفع يدك [الاثنين](side)

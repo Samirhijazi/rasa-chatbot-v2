@@ -15,3 +15,17 @@ rules:
       - action: hand_form
       - active_loop: null
       - action: action_slots_values
+
+  - rule: activate hand form
+    steps:
+      - intent: raise_hand_ar
+      - action: hand_form
+      - active_loop: hand_form
+
+  - rule: submit form
+    condition:
+    - active_loop: hand_form
+    steps:
+      - action: hand_form
+      - active_loop: null
+      - action: action_slots_values
