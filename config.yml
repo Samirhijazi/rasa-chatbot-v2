@@ -8,7 +8,7 @@ assistant_id: 20230707-115926-commutative-linkage
 
 # Configuration for Rasa NLU.
 # https://rasa.com/docs/rasa/nlu/components/
-language: en
+language: ar
 
 pipeline:
 - name: WhitespaceTokenizer
@@ -35,7 +35,7 @@ pipeline:
   epochs: 100
   retrieval_intent: chitchat
 - name: FallbackClassifier
-  threshold: 0.7
+  threshold: 0.9
   ambiguity_threshold: 0.1
 # # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
 # # If you'd like to customize it, uncomment and adjust the pipeline.
@@ -75,6 +75,7 @@ policies:
   core_fallback_threshold: 0.4
   core_fallback_action_name: "action_default_fallback"
   enable_fallback_prediction: False
+
 #   - name: UnexpecTEDIntentPolicy
 #     max_history: 5
 #     epochs: 100
@@ -82,3 +83,7 @@ policies:
 #     max_history: 5
 #     epochs: 100
 #     constrain_similarities: true
+action_servers:
+  ar:  # Arabic
+    action_default_fallback:  # Action name
+      - action_generate_response_ar

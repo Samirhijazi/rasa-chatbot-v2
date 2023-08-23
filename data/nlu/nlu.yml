@@ -110,6 +110,8 @@ nlu:
     - ايه
     - نعم
     - طبعاً
+    -  ممكن ماشي
+
 
 - intent: chitchat/intellegence
   examples: |
@@ -133,7 +135,7 @@ nlu:
     - و ما الدليل؟
     - و ليش يجب علي أن أقتنع؟
     - و هل هناك أمثلة سابقة تدعم هذا الرأي؟
-
+    - أثبتلي مدى صحة كلامك
 
 - intent: chitchat/give_details
   examples: |
@@ -142,9 +144,14 @@ nlu:
     - هذا ما بيكون اثبات 
 
 
+# - intent: chitchat/give_details2
+#   examples: |
+#     - لا بعرِف ... سؤال تانى  
+
+
 - intent: chitchat/IKnow
   examples: |
-    -لا  بعرفه بعرفه ... بس سؤال تانى انت راح تضل معنا كتير هون؟؟  
+    - انت راح تضل معنا كتير هون؟؟  
     - هل ستبقى معنا لوقت طويل؟
     -هل سيبقى تواجدك معنا لفترة؟
     - انت راح تضل معنا كتير هون؟
@@ -169,11 +176,15 @@ nlu:
     - هل بإمكانك مرافقتي إلى البيت لتقديم المساعدة؟  
     - إذا أتيت معي إلى المنزل، هل تستطيع مساعدتي؟
 
+
+- intent: chitchat/take1
+  examples: |
+    - لا أستَطيع ان اجعَلك تَصمُت ههه كمَا فعَلت الان
+
 - intent: chitchat/hi
   examples: |
     - مرحبًا يا روبوت
     - مرحبًا يا صوت الذكاء الاصطناعي 
-    - مساء الخير، أيها الروبوت
 
 
 - intent: chitchat/how_are_you
@@ -290,87 +301,138 @@ nlu:
   examples: |
     - أنا مبارح شو تعشيت؟
     -  هل تستطيع تذكيري بما تناولته للعشاء اليوم؟ 
-    - شو تناولت للفطور اليوم؟
-    - شو تغديت أنا مبارح ؟
+    - مازا تناولت للفطور اليوم؟
+    - مازا تغديت أنا مبارح ؟
 
-# - intent: chitchat/كيفك 
-#   examples: |
-#     - كيفك يا روبوت؟
-#     - ما أخبارك ياروبوت؟
-#     - هل أنت بخير ياروبوت؟
-#     - مرحبًا يا روبوت! كيف تسير الأمور؟
+- intent: chitchat/new_pdf1
+  examples: |
+    - لأ، ما رح اِقعد مع هاد الروبوت المتنمر. اتركوني بيكفي. ما بدي اقعد مع هاد الوحش الشرير ال..." 
 
+- intent: chitchat/new_pdf2
+  examples: |
+    - صباح الخير
 
-# - intent: chitchat/كيفك جاك؟
-#   examples: |
-#     - ايه والله! ماشي؛ كيفك جاك؟
-#     -ما شاء الله! أنا تمام؛ وأنت كيف حالك؟
-#     - الحمدلله؛ كيف الأحوال جاك؟
+- intent: chitchat/new_pdf3
+  examples: |
+    -يا أخي ما سأَلْتك شو الساعة ئلتلك صباح الخير
 
+- intent: chitchat/new_pdf4
+  examples: |
+    - وإنت كيف بتعرف انو هاد منهج الصف الثالث الابتدائي؟
 
-# - intent: chitchat/مبسوط؟ 
-#   examples: |
-#     - انت مبسوط؟
-#     - هل أنت سعيد؟ 
-#     - هل تشعر بالسرور؟
+- intent: chitchat/new_pdf5
+  examples: |
+    - طيب، بدي إسأَلك شي، وما بدي ياكي تقولي انت سألت فعلا، قول إِجابة
 
+- intent: chitchat/new_pdf6
+  examples: |
+    - يا ولي الصابرين. شوف يا عم الروبوت، انا معصب حاليا، وبدي ريح  مخي شوي
 
-# - intent: chitchat/na3am 
-#   examples: |
-#     - ايه
-#     - نعم
-#     - طبعاً
+- intent: chitchat/new_pdf7
+  examples: |
+    - يا زلمة
 
-# - intent: chitchat/intellegence
-#   examples: |
-#     - حلو كتير ...  هال بدنا نختبر مدى ذكاء هالروبوت الجاك لنشوف مين فينا راح يكمل لالخير بدون ما يفقد طاقته.سين سؤال .. أديه نسبة ذكائك ؟؟
-#     - مرحبًا يا روبوت، هل يمكنك الإجابة على سؤال صعب؟
-#     - هل لديك ذكاء عالي؟
-#     - هل تعتبر نفسك ذكيًّا؟
-#     - هل تمتلك مستوى ذكاء جيد؟ 
+- intent: chitchat/new_pdf8
+  examples: |
+    - قول شي نكتة، بعتئد انو ما رح تقدر
 
-# - intent: chitchat/sure_ar
-#   examples: |
-#     - متأكد من هالشي؟!
-#     - هل أنت متأكد جدًا؟ 
-#     - أنت واثق من ذلك؟
+- intent: chitchat/robot1
+  examples: |
+    - هاي مستر روبوت
 
-# - intent: chitchat/t2na3
-#   examples: |
-#     - و كيف بدك تقنعني؟ !
-#     - و ما الدليل؟
-#     - و ليش يجب علي أن أقتنع؟
-#     - و هل هناك أمثلة سابقة تدعم هذا الرأي؟
+- intent: chitchat/robot2
+  examples: |
+    - ممكن إسألك شي؟
 
+- intent: chitchat/robot3
+  examples: |
+    - يا عمي. ليش كل مرة بيصير هيك
 
-# - intent: chitchat/give_details
-#   examples: |
-#     - وشو يعنى هذا ما بيكون اثبات   
-#     - هذا ليس دليل كافياً للاثبات
+- intent: chitchat/robot4
+  examples: |
+    -شو؟ هاد حقيقة؟
 
+- intent: chitchat/robot5
+  examples: |
+    - اوك...المهم، كنت بدي اسألك،بتعرف كلمات مش منيحة؟
 
-# - intent: chitchat/IKnow
-#   examples: |
-#     -لا  بعرفه بعرفه ... بس سؤال تانى انت راح تضل معنا كتير هون؟؟  
-#     - هل ستبقى معنا لوقت طويل؟
-#     -هل سيبقى تواجدك معنا لفترة؟
+- intent: chitchat/robot6
+  examples: |
+    - "يعني شي مش منيح. كلمات مش نضيفة."
+
+- intent: chitchat/robot7
+  examples: |
+    - يلا قول يا زلمة
 
 
-# - intent: chitchat/notOkay
-#   examples: |
-#     - اجاباتك مثل الروبوتات ماشاءالله عليك...
-#     -جابات الروبوتات متكررة وغير مبتكرة
+- intent: voice
+  examples: |
+    - اي. بس وشوشني ما بدي حدا يسمع
 
+- intent: chitchat/robot9
+  examples: |
+    - شو؟!
 
-# - intent: chitchat/Question
-#   examples: |
-#     - سؤال يا جاك اذا سمحت  
-#     - هل يمكنني أن أسأل سؤال؟
-#     - لو سمحت، هل يمكنك الإجابة على سؤالي؟
+- intent: chitchat/robot10
+  examples: |
+    - ثانية واحدة. شو دخل دماغي هلأ؟.
 
+- intent: chitchat/robot11
+  examples: |
+    - بتقصد ام مخي مو نضيف.
 
-# - intent: chitchat/take
-#   examples: |
-#     - فينى اخدك معى عالبيت حتى تخدمنى؟ 
-#     - هل بإمكانك مرافقتي إلى البيت لتقديم المساعدة؟  
-#     - إذا أتيت معي إلى المنزل، هل تستطيع مساعدتي؟
+- intent: chitchat/robot12
+  examples: |
+    - جاك خبرني شو بتعرف عن الفضائيين ؟
+
+- intent: chitchat/robot13
+  examples: |
+    -  رجعنا للتكبر
+
+- intent: chitchat/robot14
+  examples: |
+    -  تفضل تفضل 
+
+- intent: chitchat/robot15
+  examples: |
+    - اووف يعني ممكن عنجد يكونو موجودين ! 
+
+- intent: chitchat/robot16
+  examples: |
+    - طيب ليش بعدهم لحد هلق ما تواصلو معنا 
+
+- intent: chitchat/robot17
+  examples: |
+    - يعني القصة قصة معدات و كم سنة و بيمشي الحال؟
+
+- intent: chitchat/robot18
+  examples: |
+    - الفييييييين سنننة !!
+
+- intent: chitchat/robot19
+  examples: |
+    - معلومات ثمينة ولله 
+
+- intent: chitchat/robot20
+  examples: |
+    - عندي مشروع عن البحر الميت لازم طلع معلومات ساعدني في
+
+- intent: chitchat/robot21
+  examples: |
+    - : شو هوي تعريف البحر الميت؟
+
+- intent: chitchat/robot22
+  examples: |
+    - ليه مستحيل حدا يغرق فيه؟
+
+- intent: chitchat/robot23
+  examples: |
+    - حلو،وليه بحط الانسان طين بس يروح لهونيك؟
+
+- intent: chitchat/robot24
+  examples: |
+    - وأديه الوقت للازم نحط الطين على الجسم؟
+
+- intent: chitchat/robot25
+  examples: |
+    - حلو وهل يؤثر سلبا على جسم الانسان؟

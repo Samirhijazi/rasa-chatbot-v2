@@ -5,3 +5,8 @@ rules:
     steps:
       - intent: chitchat
       - action: utter_chitchat
+  
+  - rule: voice
+    steps:
+      - intent: voice
+      - action: action_voice

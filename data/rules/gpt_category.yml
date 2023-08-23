@@ -18,5 +18,5 @@ rules:
 
   - rule: general information
     steps:
-      - intent: generale_information
+      - intent: general_information 
       - action: action_generale_information
