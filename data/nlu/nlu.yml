@@ -304,7 +304,6 @@ nlu:
     - مازا تناولت للفطور اليوم؟
     - مازا تغديت أنا مبارح ؟
 
-
 - intent: chitchat/new_pdf1
   examples: |
     - لأ، ما رح اِقعد مع هاد الروبوت المتنمر. اتركوني بيكفي. ما بدي اقعد مع هاد الوحش الشرير ال..." 
@@ -320,7 +319,6 @@ nlu:
 - intent: chitchat/new_pdf4
   examples: |
     - وإنت كيف بتعرف انو هاد منهج الصف الثالث الابتدائي؟
-
 
 - intent: chitchat/new_pdf5
   examples: |
@@ -358,11 +356,9 @@ nlu:
   examples: |
     - اوك...المهم، كنت بدي اسألك،بتعرف كلمات مش منيحة؟
 
-
 - intent: chitchat/robot6
   examples: |
     - "يعني شي مش منيح. كلمات مش نضيفة."
-
 
 - intent: chitchat/robot7
   examples: |
@@ -373,21 +369,17 @@ nlu:
   examples: |
     - اي. بس وشوشني ما بدي حدا يسمع
 
-
 - intent: chitchat/robot9
   examples: |
     - شو؟!
-
 
 - intent: chitchat/robot10
   examples: |
     - ثانية واحدة. شو دخل دماغي هلأ؟.
 
-
 - intent: chitchat/robot11
   examples: |
     - بتقصد ام مخي مو نضيف.
-
 
 - intent: chitchat/robot12
   examples: |
@@ -405,7 +397,6 @@ nlu:
   examples: |
     - اووف يعني ممكن عنجد يكونو موجودين ! 
 
-
 - intent: chitchat/robot16
   examples: |
     - طيب ليش بعدهم لحد هلق ما تواصلو معنا 
@@ -414,12 +405,34 @@ nlu:
   examples: |
     - يعني القصة قصة معدات و كم سنة و بيمشي الحال؟
 
-
 - intent: chitchat/robot18
   examples: |
     - الفييييييين سنننة !!
 
-
 - intent: chitchat/robot19
   examples: |
     - معلومات ثمينة ولله 
+
+- intent: chitchat/robot20
+  examples: |
+    - عندي مشروع عن البحر الميت لازم طلع معلومات ساعدني في
+
+- intent: chitchat/robot21
+  examples: |
+    - : شو هوي تعريف البحر الميت؟
+
+- intent: chitchat/robot22
+  examples: |
+    - ليه مستحيل حدا يغرق فيه؟
+
+- intent: chitchat/robot23
+  examples: |
+    - حلو،وليه بحط الانسان طين بس يروح لهونيك؟
+
+- intent: chitchat/robot24
+  examples: |
+    - وأديه الوقت للازم نحط الطين على الجسم؟
+
+- intent: chitchat/robot25
+  examples: |
+    - حلو وهل يؤثر سلبا على جسم الانسان؟
