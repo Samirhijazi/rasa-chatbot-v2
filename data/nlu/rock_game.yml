@@ -9,3 +9,16 @@ nlu:
     - Let's play, Jack!
     - it's time for roke,scissors, paper
     - You can defeat me in the rock-paper-scissors game
+
+- intent: حجرة_ورقة 
+  examples: |
+    - وقت اللعب يا جاك!
+    -  حان وقت اللعب، جاك!     
+    -  هيا لنلعب، جاك!
+    -  حان وقت لعبة الحجر والمقص والورق.
+    -  هل يمكنك هزيمتي في لعبة الحجر والمقص والورق.
+
+
+
+
+
