@@ -3,7 +3,7 @@ version: "3.1"
 nlu:
 
 - intent: provide_information
-    examples: |
+  examples: |
     - Talk with me as [scientist](category)
     - Talk with me as [Financial expert](category)
     - Talk with me as [computer scientist](category)
@@ -35,6 +35,6 @@ nlu:
     - Talk with me as [sustainability expert](category)
 
 - intent: general_information 
-    examples: |
+  examples: |
     - give me the response in general
     - respond to me without specific category

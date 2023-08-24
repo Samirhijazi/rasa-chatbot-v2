@@ -14,6 +14,18 @@ nlu:
     - Good afternoon
     - Salutations
     - Greetings
+- intent: greeting_ar
+  examples: |
+    - مرحبًا هنا
+    - هاي
+    - مرحبًا
+    - هولا
+    - بونجور
+    - مرحبًا
+    - صباح الخير
+    - مساء الخير
+    - تحية
+    - تحيات
 
 - intent: goodbye
   examples: |
@@ -31,6 +43,22 @@ nlu:
     - cu
     - Au revoire
     - see you
+- intent: goodbye_ar
+  examples: |
+    - وداعًا
+    - مع السلامة
+    - أراك لاحقًا
+    - اعتني بنفسك
+    - وداعًا
+    - أتمنى لك يومًا رائعًا
+    - وداعًا
+    - أراك لاحقًا
+    - سأتحدث معك لاحقًا
+    - حتى المرة القادمة
+    - أراك قريبًا
+    - إلى اللقاء
+    - وداعًا
+    - أراك
 
 - intent: thanks
   examples: |
@@ -45,6 +73,18 @@ nlu:
     - I'm grateful.
     - I owe you one.
     - Merci
+- intent: thanks_ar
+  examples: |
+    - شكرًا!
+    - شكرًا لك.
+    - شكرًا جزيلاً.
+    - شكرًا جزيلاً لك.
+    - أقدر ذلك.
+    - شكرًا على مساعدتك.
+    - شكرًا كثيرًا.
+    - أنت الأفضل!
+    - أنا ممتن.
+    - أنا مدين لك بواحدة.
 
 - intent: laugh
   examples: |
@@ -68,6 +108,25 @@ nlu:
     - Chuckle
     - Laughter
     - This is making me laugh
+- intent: laugh_ar
+  examples: |
+    - أوه، هذا مضحك.
+    - ههه
+    - لول
+    - هيهي
+    - هذا مضحك.
+    - لا يمكنني التوقف عن الضحك.
+    - ههههه
+    - أمور مضحكة
+    - إنها مضحكة
+    - ضحك بصوت عالٍ
+    - أنت مضحك للغاية
+    - ها! جيدة.
+    - مضحك جدًا
+    - لا يمكنني إلا أن أضحك
+    - ضحك خفيف
+    - ضحك
+    - هذا يجعلني أضحك.
 
 - intent: dance
   examples: |
@@ -77,6 +136,14 @@ nlu:
     - Show me a dance
     - Let's dance
     - I want to see you dance
+- intent: dance_ar
+  examples: |
+    - رقص
+    - ارقص من أجلي
+    - هل يمكنك الرقص؟
+    - اعرض لي رقصة
+    - هيا نرقص
+    - أريد أن أرىك ترقص
 
 - intent: like
   examples: |
@@ -88,6 +155,15 @@ nlu:
     - Like.
     - Show some love.
     - Hit the like button.
+- intent: like_ar
+  examples: |
+    - أنا أحب ذلك.
+    - أعطني إعجابًا.
+    - هل يمكنك أن تعطيني إعجابًا بالإبهام؟
+    - من فضلك، قم بإعجاب بهذا.
+    - إبهام لأعلى!
+    - إعجاب.
+    - عبّر عن بعض الحب.
 
 - intent: take a photo
   examples: |
@@ -97,6 +173,13 @@ nlu:
     - Capture an image
     - I want to take a picture
     - Click a photo
+- intent: take a photo ar
+  examples: |
+    - التقط صورة
+    - هل يمكنك التقاط صورة؟
+    - التقط صورة
+    - التقط صورة
+    - أرغب في التقاط صورة
 
 - intent: joke
   examples: |
@@ -105,3 +188,10 @@ nlu:
     - I want to hear a joke
     - Give me a joke
     - Joke time
+- intent: joke_ar
+  examples: |
+    - قل لي نكتة
+    - هل يمكنك أن تخبرني نكتة؟
+    - أريد أن أسمع نكتة
+    - أعطني نكتة
+    - وقت النكتة

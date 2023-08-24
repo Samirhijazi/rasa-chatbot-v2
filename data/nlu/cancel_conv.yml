@@ -7,3 +7,9 @@ nlu:
     - cancel conversation
     - exit conversation
     - quit conversation
+
+- intent: cancel_conversation_ar
+  examples: |
+    - اوقف المحادثة
+    - وقف الحوار
+    - خلص بس

@@ -8,3 +8,9 @@ nlu:
     - mimic my hand mouvement
     - do my hand
     - do my hand mouvement
+    
+- intent: mimic_my_hand_ar
+  examples: |
+    - قلدني
+    - افعل مثلي
+    - عمال متلي

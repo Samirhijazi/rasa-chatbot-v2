@@ -6,3 +6,8 @@ rules:
     steps:
       - intent: cancel_conversation
       - action: action_fallback
+
+  - rule: conversation cancel
+    steps:
+      - intent: cancel_conversation_ar
+      - action: action_fallback

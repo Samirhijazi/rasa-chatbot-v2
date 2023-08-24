@@ -22,6 +22,7 @@ intents:
   - rock_paper_seaser
   - provide_information
   - general_information
+  - nlu_fallback
 
 entities:
   - degree
@@ -108,6 +109,9 @@ responses:
 
   utter_cancelled:
     - text: "Okay, the conversation has been cancelled. Feel free to start again."
+
+  utter_cancelled_ar:
+    - text: "ماشي, وقفت الحوار. فيك تسألني أيا شي"
 
   utter_ask_username:
     - text: "Please enter your name"

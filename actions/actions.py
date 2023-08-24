@@ -13,6 +13,9 @@ from actions.Llama2_model.llama import Llama
 # from dotenv import load_dotenv
 import json
 import spacy
+from langdetect import detect
+from actions.username_model.translate import translateToEnglish
+import langid
 
 nlp1 = spacy.load(r".\actions\username_model\model-best")
     
@@ -131,7 +134,10 @@ class ActionGreetingMouvment(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        text = "Hello"
+        if intent == "greeting":
+            text = "Hello"
+        else:
+            text = "مرحبا"
         degree = ""
         time = ""
         #create a json array to store the data
@@ -154,7 +160,10 @@ class ActionGoodbyeMouvment(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        text = "Bye"
+        if intent == "goodbye":
+            text = "Bye"
+        else:
+            text = "ال اللقاء"
         degree = ""
         time = ""
         #create a json array to store the data
@@ -177,7 +186,10 @@ class ActionThanksMouvment(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        text = "You are welcome"
+        if intent == "thanks":
+            text = "You are welcome"
+        else:
+            text = "تكرم"
         degree = ""
         time = ""
         #create a json array to store the data
@@ -200,7 +212,10 @@ class ActionLaughMouvment(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        text = "hahaha"
+        if intent == "laugh":
+            text = "hahaha"
+        else:
+            text = "هاهاها"
         degree = ""
         time = ""
         #create a json array to store the data
@@ -223,7 +238,10 @@ class ActionDanceMouvment(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        text = "okayy!"
+        if intent == "dance":
+            text = "okayy!"
+        else:
+            text = "حسنا"
         degree = ""
         time = ""
         #create a json array to store the data
@@ -246,7 +264,10 @@ class ActionLikeMouvment(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        text = "Sure"
+        if intent == "like":
+            text = "Sure"
+        else:
+            text = "أكيد"
         degree = ""
         time = ""
         #create a json array to store the data
@@ -269,7 +290,10 @@ class ActionPhotoMouvment(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        text = "Say Cheese!"
+        if intent == "take a photo":
+            text = "Say Cheese!"
+        else:
+            text = "ضحاك"
         degree = ""
         time = ""
         #create a json array to store the data
@@ -292,18 +316,32 @@ class ActionJokeMouvment(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        jokes = [
-            "Why don't scientists trust atoms? Because they make up everything!",
-            "Parallel lines have so much in common. It's a shame they'll never meet.",
-            "Why did the scarecrow win an award? Because he was outstanding in his field!",
-            "I'm reading a book about anti-gravity. It's impossible to put down!",
-            "Why did the bicycle fall over? Because it was two-tired!",
-            "Why couldn't the leopard play hide and seek? Because he was always spotted!",
-            "How does a penguin build its house? Igloos it together!",
-            "I told my wife she was drawing her eyebrows too high. She seemed surprised.",
-            "Why don't skeletons fight each other? They don't have the guts!",
-            "What do you call a fish with no eyes? Fsh!"
-        ]
+        if intent == "joke":
+            jokes = [
+                "Why don't scientists trust atoms? Because they make up everything!",
+                "Parallel lines have so much in common. It's a shame they'll never meet.",
+                "Why did the scarecrow win an award? Because he was outstanding in his field!",
+                "I'm reading a book about anti-gravity. It's impossible to put down!",
+                "Why did the bicycle fall over? Because it was two-tired!",
+                "Why couldn't the leopard play hide and seek? Because he was always spotted!",
+                "How does a penguin build its house? Igloos it together!",
+                "I told my wife she was drawing her eyebrows too high. She seemed surprised.",
+                "Why don't skeletons fight each other? They don't have the guts!",
+                "What do you call a fish with no eyes? Fsh!"
+            ]
+        else:
+            jokes = [
+                "لماذا لا يثق العلماء في الذرات؟ لأنها تشكل كل شيء!",
+                "الخطوط المتوازية لديها الكثير من التشابه. من المؤسف أنها لن تلتقي أبدًا.",
+                "لماذا فاز دمية الحشائش بجائزة؟ لأنه كان متميزًا في ميدانه!",
+                "أنا أقرأ كتابًا عن مكافحة الجاذبية. من المستحيل أن تضعه!",
+                "لماذا سقطت الدراجة؟ لأنها كانت متعبة جدًا!",
+                "لماذا لم يستطع الفهد لعب الاختباء وراء الظهر؟ لأنه كان دائمًا مرئيًا!",
+                "كيف يبني البطريق منزله؟ إنه يجمع بينهما!",
+                "قلت لزوجتي إنها ترسم حواجبها مرتفعة جدًا. بدت متفاجئة.",
+                "لماذا لا يقاتل الهياكل العظمية بعضها البعض؟ ليس لديهم الجرأة!",
+                "ماذا تسمي سمكة بدون عيون؟ سمكة!"
+            ]
         text = random.choice(jokes)
         #create a json array to store the data
         json_response = {"text":text,
@@ -328,7 +366,7 @@ class ActionFallback(Action):
         # Reset the slots and requested slot
         events = [
             SlotSet(slot, None) for slot in ["degree", "time", "side", "requested_slot"]
-        ] + [SlotSet("requested_slot", None)]
+        ]
 
         # Check if the latest user message was the cancel intent
         if tracker.latest_message.get("intent", {}).get("name") == "cancel_conversation":
@@ -341,6 +379,17 @@ class ActionFallback(Action):
                 SlotSet("requested_slot", None),  # Reset the requested_slot slot
                 Restarted(),  # Trigger a restart of the conversation
                 dispatcher.utter_message(template="utter_cancelled")  # Send cancellation message
+            ]
+        elif tracker.latest_message.get("intent", {}).get("name") == "cancel_conversation_ar":
+            events += [
+                UserUtteranceReverted(),  # Revert the latest user message
+                SlotSet("degree", None),  # Reset the degree slot
+                SlotSet("time", None),  # Reset the time slot
+                SlotSet("side", None),  # Reset the side slot
+                SlotSet("username", None), # Reset the username slot
+                SlotSet("requested_slot", None),  # Reset the requested_slot slot
+                Restarted(),  # Trigger a restart of the conversation
+                dispatcher.utter_message(template="utter_cancelled_ar")  # Send cancellation message
             ]
         else:
             events.append(ActionExecuted("action_listen"))  # Listen for user input
@@ -359,9 +408,13 @@ class ActionMimicHand(Action):
     )->List[Dict[Text, Any]]:
         # get the intent name
         intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == "mimic_my_hand":
+            text = "I'm mimicking your hand mouvement"
+        else:
+            text = "اوكي, عم قلدك"
 
         #create a json array to store the data
-        json_response = {"text":"I'm mimicking your hand mouvement",
+        json_response = {"text":text,
                          "intent": intent,
                          "inputHint": "acceptingInput"}
         json_response = json.dumps(json_response)
@@ -370,33 +423,6 @@ class ActionMimicHand(Action):
         dispatcher.utter_message(text=json_response)
 
         return []
-
-# class ValidateUsernameForm(FormValidationAction):
-#     def name(self) -> Text:
-#         return "validate_username_form"
-
-#     def extract_username(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]):
-#         # Code here
-#         # return {"username":"test"}
-#         dispatcher.utter_message(text=f"in extract slot:{tracker.latest_message.get('text')}")
-#         return {"username":tracker.latest_message.get("text")}
-#         # dispatcher.utter_message(text=f"username slot:{tracker.get_slot('username')}")
-#         # if tracker.latest_message.get('text') == "samir":
-#         #     dispatcher.utter_message(text="in if")
-#         #     return {"username": tracker.latest_message.get("text")}
-#         # else:
-#         #     dispatcher.utter_message(text="in else")
-#         #     return [SlotSet("requested_slot","username")]    
-
-#     def validate_username(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]):
-#     # Code here
-#         dispatcher.utter_message(text="in validate username slot")
-#         dispatcher.utter_message(f"username={tracker.get_slot('username')}")
-#         if tracker.get_slot("username") == "ask_for_user_name":
-#             return {"username": None}
-#         else:
-#             return {"username": tracker.latest_message.get("text")}
-#         # return {"username": None}
     
 class ActionUsernameValue(Action):
     def name(self) -> Text:
@@ -417,8 +443,15 @@ class ActionUsernameValue(Action):
         username_confirm = tracker.get_slot("username_confirmation")
         
         # load the model of username
-        username_slot = nlp1(username_slot)
+        detected_lang, _ = langid.classify(username_slot) # detect if the input is in english or in arabic
+        print(f"detected lang of username is {detected_lang}")
+        if detected_lang == "ar":
+            username_slot = add_name_to_sentence(tracker.get_slot("username"))
+        print(f"username after add name sentence is {username_slot}")
+        username_slot = nlp1(translateToEnglish(username_slot))
+        print(f"username after translate is {username_slot}")
         username_slot = str(username_slot.ents[0])
+        print(f"username ents is {username_slot}")
         if len(username_slot) == 0:
             return [SlotSet("requested_slot", "username")]
         
@@ -428,8 +461,18 @@ class ActionUsernameValue(Action):
             dispatcher.utter_message(text="give me 'name is not recognized' to retry the scenario")
             return [SlotSet("username", None), SlotSet("username_confirmation", None)]
 
+        if detected_lang == "en":
+            text = f"Hello {username_slot}"
+        else:
+            text = f"مرحبا {username_slot}"
+        json_array = {
+            "text": text,
+            "name": username_slot,
+            "intent": "new_user"
+        }
+        json_array = json.dumps(json_array)
+        dispatcher.utter_message(text=json_array)
         # reset the username and confirmation slots
-        dispatcher.utter_message(text=f"Hello {username_slot}")
         return [SlotSet("username",None), SlotSet("username_confirmation", None)]
         
 def get_confirmation_pred(confirm_value: str,tracker:Tracker) -> str:
@@ -444,6 +487,16 @@ def get_confirmation_pred(confirm_value: str,tracker:Tracker) -> str:
         return 1
     else:
         return None
+    
+def add_name_to_sentence(sentence):
+    sentence_list = sentence.split()
+
+    # check if the length of the sentence is less than or equal to 2
+    if(len(sentence_list)) <= 2:
+        sentence_list.insert(0, "اسمي") # insert اسمي at the beginning of the list
+        
+    new_sentence = " ".join(sentence_list) # convert the list back to a string with space-separator elements
+    return new_sentence
 
 class ActionGetUserConfirmation(Action):
     def name(self) -> Text:

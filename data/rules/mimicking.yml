@@ -6,3 +6,8 @@ rules:
     steps:
       - intent: mimic_my_hand
       - action: action_mimic_hand
+      
+  - rule: mimic my hand
+    steps:
+      - intent: mimic_my_hand_ar
+      - action: action_mimic_hand

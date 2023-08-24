@@ -2,15 +2,51 @@ version: "3.1"
 
 nlu:
 
-# - intent: out_of_scope
-#   examples: |
-#     - what is the distance between moon and sun
-#     - what is python
-#     - who's the lebanon president
-#     - I want to order food
-#     - What is 2 + 2?
-#     - Who's the US President?
-#     - who is neil armestraung
-#     - how we can make tabboule
-#     - what is bmw car
-#     - what is the price of mercedes
+- intent: nlu_fallback
+  examples: |
+    - what is the distance between moon and sun
+    - what is python
+    - who's the lebanon president
+    - I want to order food
+    - What is 2 + 2?
+    - Who's the US President?
+    - who is neil armestraung
+    - how we can make tabboule
+    - what is bmw car
+    - what is the price of mercedes
+    - how we can play rock paper seasor
+    - Tell me something interesting.
+    - Do you dream?
+    - Can you recommend a good restaurant nearby?
+    - What's the latest news?
+    - How do I change a tire?
+    - Tell me a riddle.
+    - What's the best way to learn a new language?
+    - Can you do a magic trick?
+    - What's the capital of Uzbekistan?
+    - How can I bake chocolate chip cookies?
+    - Explain the concept of quantum physics.
+    - What's the difference between an alligator and a crocodile?
+    - translate how are you to french
+    - i am very bad
+    - من هو رئيس جمهورية السودان
+    - اعطيني وصفة لتحضير الكاتو
+    - كم نوع حيوان يوجد في العالم
+    - أريد أن أتعرف أكثر عن مجال التكنولوجيا
+    - كيف يمكننا لعب حجرة ورقة مقص
+    - من هو بيل غيتس
+    - من هو الون ماسك
+    - أريد كتب مختصة بالفيزياء
+    - قل لي شيئًا مثيرًا للاهتمام.
+    - هل يمكنك أن توصيني بمطعم جيد قريب من هنا؟
+    - ما هي أحدث الأخبار؟
+    - كيف يمكنني تغيير الإطار؟
+    - قدم لي لغزًا.
+    - ما هو أفضل وسيلة لتعلم لغة جديدة؟
+    - هل يمكنك أن تقوم بخدعة سحرية؟
+    - ما هو عاصمة أوزبكستان؟
+    - كيف يمكنني تحضير كعك الشوكولاتة بالشيبس؟
+    - شرح مفهوم الفيزياء الكمية.
+    - ما هو الفرق بين تمساح ونمر الماء؟
+    - ترجم صباح الخير للروسية
+
