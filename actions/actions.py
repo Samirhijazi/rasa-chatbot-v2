@@ -625,31 +625,33 @@ class ActionRockPaperGame(Action):
     def run(self, dispatcher: CollectingDispatcher,
     tracker: Tracker,
     domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        dispatcher.utter_message(text="Let's start")
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == " rock_paper_seaser " :
+            dispatcher.utter_message(text="Let's start")
+        else:
+            dispatcher.utter_message(text="هيا لنبدأ")
+            
+            jsonRocker = {
+                "degree": "90",
+                "action": "Rocker",
+                "time" :  "3",
+            }
 
-        jsonRocker = {
-            "degree": "90",
-            "action": "Rocker",
-            "time" :  "3",
-        }
+            jsonPeaper = {
+                "degree": "90",
+                "action": "Peaper",
+                "time" :  "3",
+            }
 
-        jsonPeaper = {
-            "degree": "90",
-            "action": "Peaper",
-            "time" :  "3",
-        }
-
-        jsonSeaser = {
-            "degree": "90",
-            "action": "Seaser",
-            "time" :  "3",
-        }
+            jsonSeaser = {
+                "degree": "90",
+                "action": "Seaser",
+                "time" :  "3",
+            }
 
         jsonPeaper = json.dumps(jsonPeaper)
         jsonSeaser = json.dumps(jsonSeaser)
         jsonRocker = json.dumps(jsonRocker)
-
 
         choice = [jsonPeaper,jsonRocker,jsonSeaser]
         game = random.choice(choice)
@@ -667,7 +669,12 @@ class ActionProvideInfo(Action):
         domain: Dict[Text, Any],
     )-> List[Dict[Text, Any]]:
         print(f"category slot: {tracker.get_slot('category')}")
-        dispatcher.utter_message(template="utter_provide_information")
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if  intent == "provide_information":
+            dispatcher.utter_message(template="utter_provide_information")
+        else :
+            dispatcher.utter_message(template="utter_provide_information_ar")
+            
         return []
     
 class ActiongenraleInfo(Action):

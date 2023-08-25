@@ -186,13 +186,12 @@ nlu:
     - مرحبًا يا روبوت
     - مرحبًا يا صوت الذكاء الاصطناعي 
 
-
 - intent: chitchat/how_are_you
   examples: |
     - كيف حالك؟
     - كيفك؟
     - ما أخبارك 
-    - هل أنت بخير ؟
+    -  أنت بخير ؟
 
 
 - intent: chitchat/good
@@ -436,3 +435,60 @@ nlu:
 - intent: chitchat/robot25
   examples: |
     - حلو وهل يؤثر سلبا على جسم الانسان؟
+
+- intent: chitchat/chatbot1
+  examples: |
+    - كرمال الله بدي اتخرج من الجامعة وبدي موضوع كتير قوي احكي فيه
+
+- intent: chitchat/chatbot2
+  examples: |
+    - عطيني معلومات اكتر عن الموضوع
+
+- intent: chitchat/chatbot3
+  examples: |
+    - هيدا الموضوع كتير قوي بدي منك طلعلي عن اسباب هجرة الادمغة
+
+- intent: chitchat/chatbot4
+  examples: |
+    -  كتير حبيت طيب كيف فينا نلاقي حلول؟
+
+- intent: chitchat/chatbot5
+  examples: |
+    -  انت انقذتني اليوم عنجد يلي ما عندو روبوت بفوت بالحيط
+
+- intent: chitchat/chatbot6
+  examples: |
+    - فيك تعطيني معلومات عن الزلازل؟
+
+- intent: chitchat/chatbot7
+  examples: |
+    - طيب وكيف بصير الزلزال بالزبط؟
+
+
+- intent: chitchat/chatbot8
+  examples: |
+    - وشو بعد بتعرف عن الزلازل؟
+
+- intent: chitchat/chatbot9
+  examples: |
+    - وعند حدوثه كيف فينا نحمي حالنا؟
+
+- intent: chitchat/chatbot10
+  examples: |
+    - بدي منك تعطيني معلومات عن البراكين
+
+- intent: chitchat/chatbot11
+  examples: |
+    - طيب شو هني اجزاء البراكين؟
+
+- intent: chitchat/chatbot12
+  examples: |
+    - وشو هي نتائج البراكين؟
+
+- intent: chitchat/chatbot13
+  examples: |
+    - وهل البراكين مهمة للارض؟
+
+- intent: chitchat/chatbot14
+  examples: |
+    - شكرا كتير على هالمعلومات عنجد ساعدتني لو كنت انا بدي فتش عكل هالمعلومات كنت ضليت اكتر من نهار بس انت بظرف دقايق كنت مطلعلي كل شي ممكن اني عوزو

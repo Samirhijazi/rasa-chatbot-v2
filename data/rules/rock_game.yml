@@ -6,3 +6,9 @@ rules:
     steps:
       - intent: rock_paper_seaser
       - action: action_rockpaper_game
+
+
+  - rule: chitchat_Game_ar
+    steps:
+      - intent: حجرة_ورقة
+      - action: action_rockpaper_game

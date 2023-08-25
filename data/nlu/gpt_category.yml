@@ -38,3 +38,45 @@ nlu:
   examples: |
     - give me the response in general
     - respond to me without specific category
+
+- intent: general_information_ar
+  examples: |
+    -  قدم لي الإجابة بشكل عام.
+    -  أجب عليّ بدون تحديد فئة معينة.
+
+
+
+- intent: provide_information_ar
+  examples: |
+    - (category)تحدث معي ك [عالم]
+    - (category)تحدث معي ك [خبير مالي]
+    - (category)تحدث معي ك [ عالِم حاسوب]
+    - (category)تحدث معي ك [عالِم نفسي]
+    - (category)تحدث معي ك [ خبير في وسائل التواصل الاجتماعي]
+    - (category)تحدث معي ك [ مستشار تغذية شخصي]
+    - (category)تحدث معي ك [مستشار تصميم داخلي]
+    - (category)تحدث معي ك [مستشار في إدارة الوقت]
+    - (category)تحدث معي ك [مدرب لياقة بدنية]
+    - (category)تحدث معي كـ [ مخطط فعاليات]
+    - (category)تحدث معي ك [ خبير تكنولوجيا]
+    - (category)تحدث معي ك [مدرب رياضي]
+    - (category)تحدث معي ك [مخطط فعاليات]
+    - (category)تحدث معي ك [ خبير تكنولوجيا]
+    - (category)تحدث معي ك [ مدرب رياضي]
+    - (category)تحدث معي ك [ خبير طقس]
+    - (category)تحدث معي ك [ موسيقيون مشهورون]
+    - (category)تحدث معي ك [فنان]
+    - (category)تحدث معي ك[ طاهٍ]
+    - (category)تحدث معي كـ[ مستشار صحة]
+    - (category)تحدث معي كـ[ موضة]
+    - (category)تحدث معي ك [ مصور فوتوغرافي]
+    - (category)تحدث معي ك [كتّاب مشهورون]
+    - (category)تحدث معي ك [مستشار سفر]
+    - (category)تحدث معي ك [هندسة معمارية]
+    - (category)تحدث معي ك [ فنان موسيقي]
+    - (category)تحدث معي ك [ مستشار مهني شخصي]
+    - (category)تحدث معي ك [ خبير أمان سيبرنيتي]
+    - (category)تحدث معي ك  [مدرب فيزياء]
+    - (category)تحدث معي ك [ استشاري تاريخ]
+    - (category)تحدث معي ك [ مستشار تربية الأبناء]
+    - (category)تحدث معي ك [خبير في الاستدامة]

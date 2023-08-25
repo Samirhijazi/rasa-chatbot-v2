@@ -1,6 +1,0 @@
-version: "3.1"
-nlu:
-- intent: nlu_fallback
-  examples: |
-    - من هو رئيس جمهورية الصومال
-    - اعطني وصفة لتحضير الكاتو
