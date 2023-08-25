@@ -1,16 +1,11 @@
 from typing import Any, Text, Dict, List, Union
-from datetime import datetime, timedelta
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet, UserUtteranceReverted, ActionExecuted, Restarted, AllSlotsReset, FollowupAction
-from rasa_sdk.forms import FormValidationAction
 import re
 import pickle
 import random  
 from actions.degree_model.bert_model import get_sentence_embedding
-from actions.chatGPT.chatgpt import GPT3
-from actions.Llama2_model.llama import Llama
-# from dotenv import load_dotenv
 import json
 import spacy
 from langdetect import detect
@@ -442,34 +437,53 @@ class ActionUsernameValue(Action):
         print(f"username value {username_slot}")
         username_confirm = tracker.get_slot("username_confirmation")
         
-        # load the model of username
         detected_lang, _ = langid.classify(username_slot) # detect if the input is in english or in arabic
-        print(f"detected lang of username is {detected_lang}")
-        if detected_lang == "ar":
-            username_slot = add_name_to_sentence(tracker.get_slot("username"))
-        print(f"username after add name sentence is {username_slot}")
-        username_slot = nlp1(translateToEnglish(username_slot))
-        print(f"username after translate is {username_slot}")
-        username_slot = str(username_slot.ents[0])
-        print(f"username ents is {username_slot}")
-        if len(username_slot) == 0:
-            return [SlotSet("requested_slot", "username")]
+        if len(username_slot.split()) <= 2:
+            if detected_lang == "ar":
+                text = f"مرحبا {username_slot}"
+            else:
+                text = f"Hello {username_slot}"
+        else:
+            # load the model of username
+            # detected_lang, _ = langid.classify(username_slot) # detect if the input is in english or in arabic
+            # print(f"detected lang of username is {detected_lang}")
+            if detected_lang == "ar":
+                username_slot = add_name_to_sentence(tracker.get_slot("username"))
+            print(f"username after add name sentence is {username_slot}")
+            if detected_lang == "ar":
+                username_slot = nlp1(translateToEnglish(username_slot))
+            else:
+                username_slot = nlp1(username_slot)
+            print(f"username after translate is {username_slot}")
+            if username_slot.ents:
+                username_slot = str(username_slot.ents[0])
+                print(f"username ents is {username_slot}")
+            else:
+                print("No username entity found")
+                return [SlotSet("username", None), SlotSet("username_confirmation", None)]
+            if len(username_slot) == 0:
+                return [SlotSet("requested_slot", "username")]
         
         # load the model of confirmation
+        detected_lang_confirm, _ = langid.classify(username_confirm) # detect if the input of confirmation is in english or in arabic
+        if detected_lang_confirm == "ar":
+            username_confirm = translateToEnglish(username_confirm) # translate the confirmation message to english
+        print(f"username confirm : {username_confirm}")
         confirm_pred = get_confirmation_pred(username_confirm,tracker)
         if confirm_pred is None:
             dispatcher.utter_message(text="give me 'name is not recognized' to retry the scenario")
             return [SlotSet("username", None), SlotSet("username_confirmation", None)]
 
-        if detected_lang == "en":
-            text = f"Hello {username_slot}"
-        else:
+        if detected_lang == "ar":
             text = f"مرحبا {username_slot}"
+        else:
+            text = f"Hello {username_slot}"
         json_array = {
             "text": text,
             "name": username_slot,
             "intent": "new_user"
         }
+        print(f"text : {text}")
         json_array = json.dumps(json_array)
         dispatcher.utter_message(text=json_array)
         # reset the username and confirmation slots
@@ -576,7 +590,6 @@ class ActionLlama(Action):
             json_data = json.dumps(data)
             client_socket.send(json_data.encode("utf-8"))
 
-
             # Receive and print the response from the server
             response = client_socket.recv(1024).decode("utf-8")
             intent_name = "conversation"
@@ -626,7 +639,7 @@ class ActionRockPaperGame(Action):
     tracker: Tracker,
     domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        if intent == " rock_paper_seaser " :
+        if intent == "rock_paper_seaser" :
             dispatcher.utter_message(text="Let's start")
         else:
             dispatcher.utter_message(text="هيا لنبدأ")
@@ -704,21 +717,10 @@ class ActionVoice(Action):
         intent = tracker.latest_message.get("intent", {}).get("name")
         text = "المطبخْ. الحمّامْ.."
         json_array = {
-                       "text": text,
-                       "entites" : entites,
-                       "intent" : intent
+                    "text": text,
+                    "entites" : entites,
+                    "intent" : intent
         } 
         json_voice = json.dumps(json_array)
         dispatcher.utter_message(json_voice)
         return[]
-    
-    
-    
-# actions.py
-# class ActionGenerateResponseAr(Action):
-#     def name(self) -> Text:
-#         return "action_generate_response_ar"
-
-#     def run(self, dispatcher, tracker, domain):
-#         print("arabic")
-#         return []

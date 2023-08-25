@@ -6,7 +6,7 @@ import time
 import socket
 
 # Set your OpenAI API key
-api_key = "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"
+api_key = "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"
 openai.api_key = api_key
 # Define the previous conversation (if any)
 previous_conversation = [

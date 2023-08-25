@@ -44,8 +44,6 @@ nlu:
     -  قدم لي الإجابة بشكل عام.
     -  أجب عليّ بدون تحديد فئة معينة.
 
-
-
 - intent: provide_information_ar
   examples: |
     - (category)تحدث معي ك [عالم]
