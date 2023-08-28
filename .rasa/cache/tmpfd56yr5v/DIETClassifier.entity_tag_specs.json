@@ -1,0 +1,20 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-conformation",
+      "2": "I-conformation",
+      "3": "L-conformation",
+      "4": "U-conformation",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-conformation": 1,
+      "I-conformation": 2,
+      "L-conformation": 3,
+      "U-conformation": 4,
+      "O": 0
+    },
+    "num_tags": 5
+  }
+]

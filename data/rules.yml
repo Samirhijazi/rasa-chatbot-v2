@@ -1,0 +1,40 @@
+version: "3.1"
+
+rules:
+
+  - rule: hhhh
+    steps:
+      - intent: chatbot
+      - action: utter_chatbot
+
+  - rule: greet
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+
+  - rule: out_of_scope
+    condition:
+      - active_loop: null
+    steps:
+      - intent: nlu_fallback
+      - action: action_default_fallback
+
+
+  - rule: activate_form
+    steps:
+      - intent: askName
+      - action: conformation_form
+      - active_loop: conformation_form
+
+  - rule: submit_conformation_form
+    condition:
+      - active_loop: conformation_form
+    steps:
+      - action: conformation_form
+      - active_loop: null
+      - slot_was_set:
+        - requested_slot: null
+      - action: action_confirmation
+
+

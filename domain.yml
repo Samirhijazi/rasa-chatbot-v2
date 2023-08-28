@@ -1,0 +1,51 @@
+version: '3.1'
+intents:
+  - chatbot
+  - greet
+  - askName
+
+slots:
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: conformation_form
+        requested_slot: name
+
+responses:
+  utter_greet:
+    - text: hi
+    - text: hey
+  utter_chatbot/hey: 
+    - text: هاي
+    - text: مرحباً
+  utter_chatbot/HOW_ARE_YOU:
+    - text: fine and you
+    - text: I'm fine, thank you. How about you?
+    - text: I'm doing well, and you?
+    - text: I'm okay. How's your day going?
+  utter_chatbot/كيفك:
+    - text: أنا بخير، شكراً. وأنت؟
+    - text: أنا بخير، وأنت؟
+  utter_chatbot/fine:
+    - text: ''
+  utter_chatbot/fine_ar:
+    - text: ''
+  utter_ask_name:
+    - text: "they tell me jack , Enter new name or say pass"
+
+
+actions:
+  - action_default_fallback
+  - action_confirmation
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+forms:
+  conformation_form:
+    required_slots:
+      - name

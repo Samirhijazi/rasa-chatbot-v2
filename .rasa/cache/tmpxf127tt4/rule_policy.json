@@ -1,0 +1,18 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"chatbot\"}}]": "utter_chatbot",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"chatbot\"}}, {\"prev_action\": {\"action_name\": \"utter_chatbot\"}, \"user\": {\"intent\": \"chatbot\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {},
+    "rules_not_in_stories": [
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"chatbot\"}}, {\"prev_action\": {\"action_name\": \"utter_chatbot\"}, \"user\": {\"intent\": \"chatbot\"}}]",
+      "predicting default action with intent restart",
+      "predicting default action with intent back",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"chatbot\"}}]",
+      "predicting default action with intent session_start"
+    ]
+  }
+}

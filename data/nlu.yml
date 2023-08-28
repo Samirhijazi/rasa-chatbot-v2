@@ -1,0 +1,74 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - hey there
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: chatbot/hey
+  examples: |
+    - مرحباً
+    - مساء الخير
+    - صباح الخير
+    - هاي
+- intent: chatbot/HOW_ARE_YOU
+  examples: |
+    - How are you?
+    - How are you doing?
+    - How's everything?
+    - How's it going?
+    - How's your day?
+    - How have you been?
+    - How's life treating you?
+    - How's your day been so far?
+- intent: chatbot/كيفك
+  examples: |
+    - كيفك يا روبوت؟
+    - ما أخبارك ياروبوت؟
+    - هل أنت بخير ياروبوت؟
+    - كيف حالك؟
+    - كيفك؟
+    - شو أخبارك
+    - أنت بخير ؟
+    - انت منيح
+
+- intent: chatbot/fine
+  examples: |
+    - fine
+    - I'm great
+    - I'm good, thanks.
+
+
+- intent: chatbot/fine_ar
+  examples: |
+    - منيح
+    - تمام
+
+- intent: askName
+  examples: |
+    - What are you called?
+    - What should I call you?
+    - Are you named something?
+    - What's your given name?
+    - What's your name?
+
+- intent: nlu_fallback
+  examples: |
+    - what is python
+    - what is computer science
+    - who's the lebanon president
+    - I want to order food
+    - What's 2 + 2?
+    - Who's the US President?
+    - who is neil armestraung
+    - how we can make tabboule
+    - what is bmw car
+    - give me books in arabic
+    - give me the details of how make cake

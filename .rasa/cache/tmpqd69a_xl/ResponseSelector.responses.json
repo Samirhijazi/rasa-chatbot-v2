@@ -1,0 +1,42 @@
+{
+  "utter_chatbot/hey": [
+    {
+      "text": "هاي"
+    },
+    {
+      "text": "مرحباً"
+    }
+  ],
+  "utter_chatbot/HOW_ARE_YOU": [
+    {
+      "text": "fine and you"
+    },
+    {
+      "text": "I'm fine, thank you. How about you?"
+    },
+    {
+      "text": "I'm doing well, and you?"
+    },
+    {
+      "text": "I'm okay. How's your day going?"
+    }
+  ],
+  "utter_chatbot/كيفك": [
+    {
+      "text": "أنا بخير، شكراً. وأنت؟"
+    },
+    {
+      "text": "أنا بخير، وأنت؟"
+    }
+  ],
+  "utter_chatbot/fine": [
+    {
+      "text": ""
+    }
+  ],
+  "utter_chatbot/fine_ar": [
+    {
+      "text": ""
+    }
+  ]
+}
